@@ -8,6 +8,6 @@ public class MainController {
 
     @RequestMapping("/")
     public String MainPage(){
-        return "file";
+        return "MainPage";
     }
 }
