@@ -1,0 +1,118 @@
+*{
+    margin:  0;
+    padding: 0 ;
+    font-family: 'Times New Roman' ;
+    font-size: 15.75px;
+}
+
+.hero{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(47, 133, 204, 0.6),rgba(255, 179, 0, 0.6)),url(sjsu_logo.jpg);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+}
+
+.form-box{
+    width: 380px;
+    height: 620px;
+    position: relative;
+    margin: 6% auto;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 5px; 
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.button-box{
+    width: 220px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #008bfc4d;
+    border-radius: 30px;
+}
+
+.toggle-btn{
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+
+.input-group{
+    top: 180px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+
+.input-field{
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+.submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    /*background: linear-gradient(to top, rgba(52, 131, 196),rgb(194, 208, 219));*/
+    background: #FFB22F;
+    background: -moz-radial-gradient(center, #FFB22F , #2B93CB , #2588CB );
+    background: -webkit-radial-gradient(center, #FFB22F 0%, #2B93CB 55%, #2588CB 100%);
+    background: radial-gradient(ellipse at center, #FFB22F 0%, #2B93CB 55%, #2588CB 100%);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+
+.submit-btn:hover {
+    background: #FFB22F;}
+.submit-btn:active {
+    background: #1C689B;}
+
+.check-box{
+    margin: 30px 10px 30px 0;
+}
+span{
+    color: #777;
+    font-size: 12px;
+    bottom: 68px;
+    position: absolute;
+}
+
+
+
+#btn{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    /*background: linear-gradient(to top, rgba(52, 131, 196),rgb(194, 208, 219));*/
+    background: #FFB22F;
+    background: -moz-radial-gradient(center, #FFB22F 0%, #2B93CB 55%, #2588CB 100%);
+    background: -webkit-radial-gradient(center, #FFB22F 0%, #2B93CB 55%, #2588CB 100%);
+    background: radial-gradient(ellipse at center, #FFB22F 0%, #2B93CB 55%, #2588CB 100%);
+    border-radius: 30px;
+    transition: .5s;
+}
+
+#login{
+    left: 50px;
+}
+
+#register{
+    left: 450px;
+}
