@@ -9,11 +9,31 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
-    <title>Hello, world!</title>
+    <title>Main Page</title>
 </head>
+<style>
+
+    #header{
+        background-color: #0055A2 ;
+    }
+
+</style>
 <body>
-<h1>Hello, world!</h1>
-<button class="btn btn-primary">hi</button>
+
+<%--Navbar for the top--%>
+<nav  class="navbar navbar-light" id="header">
+    <a class="navbar-brand" href="#">
+        <img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
+        SJSU
+    </a>
+
+    <a class="navbar-brand">
+        <img src="/images/cog-8x.png" width="30" height="30" class="d-inline-block align-top" alt="cog">
+        <img src="/images/cart-8x.png" width="30" height="30" class="d-inline-block align-top" alt="cart">
+    </a>
+</nav>
+
+
 
 
 
