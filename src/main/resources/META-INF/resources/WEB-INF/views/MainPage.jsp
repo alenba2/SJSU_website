@@ -14,39 +14,27 @@
 
     <title>Main Page</title>
 </head>
+
 <style>
-
-    #header{
-        background-color: #0055A2 ;
+    .offset{
+        margin-top: 100px;
+        width: 1000px;
     }
-    .navbar{
-        /*overflow: hidden;*/
-        /*border-radius: 0px;*/
-        /*position: fixed;*/
-        /*top: 0; !* Position the navbar at the top of the page *!*/
-        /*width: 100%; !* Full width *!*/
-    }
-
-
 </style>
+
 <body>
 
-<%-- ------------------- Navbar for the top ------------------  --%>
+<%-- --------- Display items --------------------   -----------------      --%>
 
-<jsp:include page="NavBar.jsp"/>
+<div class="card-columns container offset" >
 
-<%-- ---------  items --------------------   -----------------      --%>
-
-
-<div class="card-columns">
-
-    <c:forEach var = "i" begin = "1" end = "20">
+    <c:forEach var = "i" begin = "1" end = "9">
         <div class="card" >
             <img class="card-img-top" src="..." width="200" height="250">
             <div class="card-body text-center">
                 <p class="card-text">Total: ${cost} </p>
                 <p class="card-text">Stock: ${stock} </p>
-                <button class="btn btn-primary">-</button> 6 <button class="btn btn-primary">+</button>
+                <button class="btn btn-primary">-</button> 0 <button class="btn btn-primary">+</button>
             </div>
         </div>
         <br>
@@ -54,6 +42,13 @@
 
 </div>
 
+<%-- ------------------- Navbar for the top ------------------  --%>
+
+<jsp:include page="NavBar.jsp"/>
+
+<script>
+
+</script>
 
 
 <!-- Optional JavaScript -->

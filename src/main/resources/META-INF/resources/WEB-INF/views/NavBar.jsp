@@ -1,5 +1,17 @@
 
+<style>
 
+    #header{
+        background-color: #0055A2 ;
+    }
+    .navbar{
+        overflow: hidden;
+        position: fixed;
+        top: 0; /* Position the navbar at the top of the page */
+        width: 100%; /* Full width */
+    }
+
+</style>
 <body>
 
 
