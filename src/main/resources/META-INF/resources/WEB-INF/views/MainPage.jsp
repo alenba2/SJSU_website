@@ -37,9 +37,9 @@
 
 
 <div class="card-columns container offset" >
+    <form:form action="/" method="post">
+    <c:forEach var = "i" begin = "0" end = "8">
 
-<%--    <c:forEach var = "i" begin = "0" end = "8">--%>
-<form:form action="/" method="post">
 
     <input type="hidden" id="buttonName" value="" name="buttonName">
 
@@ -58,9 +58,10 @@
                 <button class="btn btn-primary">+</button>
             </div>
         </div>
-        <%--    </c:forEach>--%>
-</form:form>
-<%--    <c:set target="${num}" value="1"/>--%>
+
+
+    </c:forEach>
+    </form:form>
 
 
 </div>
