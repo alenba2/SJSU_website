@@ -18,7 +18,6 @@ public class MainController {
     }
 
     @PostMapping("/MainPage")
-
     public String MainPage2(@RequestParam(name = "buttonName") int change, Model model){
 
         num[change] = num[change] - 1;
@@ -28,6 +27,16 @@ public class MainController {
 
         return "MainPage";
     }
+
+//    ItemPage
+    @RequestMapping("/ItemPage")
+    public String ItemPage(Model model) {
+
+        model.addAttribute("num", num);
+
+        return "ItemPage";
+    }
+
 //    CartPage
     @RequestMapping("/Cart")
     public String Cart()

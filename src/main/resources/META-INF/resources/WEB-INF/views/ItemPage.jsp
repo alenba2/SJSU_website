@@ -13,49 +13,85 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
-    <title>Main Page</title>
+    <title>Item Page</title>
 </head>
 
 
+
+
 <style>
-    .offset{
+    #ItemPic{
         margin-top: 100px;
-        width: 1000px;
+        margin-left: 100px;
+    }
+    #TextBox{
+        position: relative;
+        top: -250px;
+        left: 350px;
+        width: 500px;
+    }
+    #InventoryBox{
+        position:relative;
+        float:right;
+        right:50px;
+        top: -400px;
+
+        width: 350px;
+        padding: 20px;
+        border-radius: 25px;
+        background-color: #e9ecef;
+
+
     }
 </style>
 
 <body>
 
-<%-- --------- Display items --------------------   -----------------      --%>
+<%-- --------- Display item --------------------   -----------------      --%>
 
+<%-- Image --%>
+<img src="..." width="200" height="250" id="ItemPic">
+<%-- Description--%>
+<div id="TextBox">
+    <a>
+        Item Name: Banana
+    </a>
+    <br>
+    <br>
+    <a>
+        Cost: <a style="color:red">$13.01</a>
+    </a>
+    <br>
+    <br>
+    <a>
+        Description: This is a godly Banana from the Bahamas, which tells no tales of blood and glory. This banana should be in a museum instead of the market
+    </a>
+</div>
 
+<%-- Inventory Box --%>
 
-<div class="card-columns container offset" >
-    <form:form action="/" method="post">
-    <c:forEach var = "i" begin = "0" end = "8">
-
-
-    <input type="hidden" id="buttonName" value="" name="buttonName">
-
-        <div class="card" >
-            <img class="card-img-top" src="..." width="200" height="250">
-            <div class="card-body text-center">
-                <p class="card-text">Item Name: ${itemName} </p>
-                <p class="card-text">Total: ${cost} </p>
-            </div>
-        </div>
-
-
-    </c:forEach>
+<div id="InventoryBox" style="text-align: center">
+    <form:form>
+        <a>Item Availability: <a style="color: green">Yes</a></a>
+        <br>
+        <br>
+        <a>
+            <label for="Stock">Stock: </label>
+            <select name="Stock" id="Stock">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </a>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-warning" > Checkout </button>
     </form:form>
-
-
 </div>
 
 <%-- ------------------- Navbar for the top ------------------  --%>
 
 <jsp:include page="NavBar.jsp"/>
-
 
 
 <!-- Optional JavaScript -->
