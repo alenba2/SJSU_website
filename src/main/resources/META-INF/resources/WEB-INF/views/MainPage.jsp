@@ -46,16 +46,8 @@
         <div class="card" >
             <img class="card-img-top" src="..." width="200" height="250">
             <div class="card-body text-center">
+                <p class="card-text">Item Name: ${itemName} </p>
                 <p class="card-text">Total: ${cost} </p>
-                <p class="card-text">Stock: ${stock} </p>
-                <button class="btn btn-primary" onclick="decrement_value(0)" type="submit">-</button>
-
-
-                ${num[0]}
-
-
-
-                <button class="btn btn-primary">+</button>
             </div>
         </div>
 

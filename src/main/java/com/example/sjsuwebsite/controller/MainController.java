@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
     int[] num = {0,0,0,0,0,0,0,0,0};
 
+//    MainPage
     @RequestMapping("/MainPage")
     public String MainPage(Model model) {
 
@@ -27,31 +28,37 @@ public class MainController {
 
         return "MainPage";
     }
+//    CartPage
     @RequestMapping("/Cart")
     public String Cart()
     {
         return "cart";
     }
+//    AccountSettings
     @RequestMapping("/AccountSettings")
     public String AccountSettings()
     {
         return "AccountSettings";
     }
+//    ????
     @RequestMapping("/one")
     public String one()
     {
         return "file";
     }
+//    PurchaseHistory
     @RequestMapping("/PurchaseHistory")
     public String PurchaseHistory()
     {
         return "PurchaseHistory";
     }
+//    ????
     @RequestMapping("/two")
     public String two()
     {
         return "test";
     }
+//    ??????
     @RequestMapping("/three")
     public String three()
     {
