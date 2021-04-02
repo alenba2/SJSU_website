@@ -11,6 +11,7 @@ public class MainController {
         return "file";
     }
 
+
     @RequestMapping("/test")
     public String MainPage2(){
         return "test";
@@ -20,4 +21,5 @@ public class MainController {
     public String MainPage3(){
         return "test2";
     }
+
 }
