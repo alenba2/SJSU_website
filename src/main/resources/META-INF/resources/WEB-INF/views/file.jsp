@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; ISO-8859-1"
          pageEncoding="iso-8859-1"%>
-<mvc:resources mapping="/resources/**" location="/resources/static/" />
+
 <html>
 
 <head>
     <title>Login And Registration Form</title>
+    <mvc:resources mapping="/resources/**" location="/resources/static/" />
     <link href="/css/style.css" rel="stylesheet"/>
 
 </head>
