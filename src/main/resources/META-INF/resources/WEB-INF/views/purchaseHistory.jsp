@@ -24,6 +24,11 @@
         text-align: center;
         padding-top: 100px;
     }
+
+    #back-btn {
+        padding-top: 50px;
+    }
+
 </style>
 
 <body>
@@ -33,17 +38,25 @@
 <div class="container">
     <a href="#" class="list-group-item list-group-item-action">
         Purchase date: March 29, 2021
-        <span style="float:right; color:green;">$36.89</span>
+        <span style="float:right; color:green;">&nbsp;$36.89</span>
+        <span style="float:right;">Total: </span>
     </a>
     <a href="#" class="list-group-item list-group-item-action">
         Purchase date: February 21, 2021
-        <span style="float:right; color:green;">$19.51</span>
+        <span style="float:right; color:green;">&nbsp;$19.51</span>
+        <span style="float:right;">Total: </span>
     </a>
     <a href="#" class="list-group-item list-group-item-action">
         Purchase date: January 6, 2021
-        <span style="float:right; color:green;">$25.63</span>
+        <span style="float:right; color:green;">&nbsp; $25.63</span>
+        <span style="float:right;">Total: </span>
     </a>
 </div>
+
+<div id="back-btn" class="text-center">
+    <button type="button" class="btn btn-primary">Go back</button>
+</div>
+
 
 <jsp:include page="NavBar.jsp"/>
 
