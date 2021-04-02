@@ -79,7 +79,7 @@
 </script>
 
 
-
+<jsp:include page="NavBar.jsp"/>
 
 </body>
 

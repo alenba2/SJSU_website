@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
     int[] num = {0,0,0,0,0,0,0,0,0};
 
-    @RequestMapping("/")
+    @RequestMapping("/MainPage")
     public String MainPage(Model model) {
 
         model.addAttribute("num", num);
@@ -16,7 +16,7 @@ public class MainController {
         return "MainPage";
     }
 
-    @PostMapping("/")
+    @PostMapping("/MainPage")
 
     public String MainPage2(@RequestParam(name = "buttonName") int change, Model model){
 
@@ -27,15 +27,34 @@ public class MainController {
 
         return "MainPage";
     }
-
-
-    @RequestMapping("/test")
-    public String MainPage2(){
+    @RequestMapping("/Cart")
+    public String Cart()
+    {
+        return "cart";
+    }
+    @RequestMapping("/AccountSettings")
+    public String AccountSettings()
+    {
+        return "AccountSettings";
+    }
+    @RequestMapping("/one")
+    public String one()
+    {
+        return "file";
+    }
+    @RequestMapping("/PurchaseHistory")
+    public String PurchaseHistory()
+    {
+        return "PurchaseHistory";
+    }
+    @RequestMapping("/two")
+    public String two()
+    {
         return "test";
     }
-
-    @RequestMapping("/test2")
-    public String MainPage3(){
+    @RequestMapping("/three")
+    public String three()
+    {
         return "test2";
     }
 
