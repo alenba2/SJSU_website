@@ -1,4 +1,4 @@
 # SJSU_website
 SJSU Shopping website
 
-clone then rune SjsuwebsiteApplication.java
+clone then run SjsuwebsiteApplication.java
