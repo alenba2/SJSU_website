@@ -37,25 +37,20 @@ public class MainController {
     {
         return "AccountSettings";
     }
-    @RequestMapping("/one")
-    public String one()
-    {
-        return "file";
-    }
     @RequestMapping("/PurchaseHistory")
     public String PurchaseHistory()
     {
         return "PurchaseHistory";
     }
-    @RequestMapping("/two")
-    public String two()
+    @RequestMapping("/login")
+    public String Login()
     {
-        return "test";
+        return "Login";
     }
-    @RequestMapping("/three")
-    public String three()
+    @RequestMapping("/SignUp")
+    public String SignUp()
     {
-        return "test2";
+        return "SignUp";
     }
 
 }

@@ -1,6 +1,9 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <mvc:resources mapping="/resources/**" location="/resources/static/" />
 
 <!------ Include the above in your HEAD tag ---------->
@@ -33,13 +36,13 @@
 <%--                        <div class="input-group-append">--%>
 <%--                            <span class="input-group-text"><i class="fas fa-user"></i></span>--%>
 <%--                        </div>--%>
-                        <input type="text" name="" class="form-control input_user" value="" placeholder="username">
+                        <input type="text" name="userName" class="form-control input_user" value="" placeholder="username">
                     </div>
                     <div class="input-group mb-2">
 <%--                        <div class="input-group-append">--%>
 <%--                            <span class="input-group-text"><i class="fas fa-key"></i></span>--%>
 <%--                        </div>--%>
-                        <input type="password" name="" class="form-control input_pass" value="" placeholder="password">
+                        <input type="password" name="passWord" class="form-control input_pass" value="" placeholder="password">
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
