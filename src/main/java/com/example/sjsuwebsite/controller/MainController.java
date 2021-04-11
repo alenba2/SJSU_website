@@ -1,11 +1,17 @@
 package com.example.sjsuwebsite.controller;
 
+import com.example.sjsuwebsite.model.Users;
+import com.example.sjsuwebsite.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
+    @Autowired
+    UserRepository repo;
+
     int[] num = {0,0,0,0,0,0,0,0,0};
 
 //    MainPage
@@ -49,29 +55,69 @@ public class MainController {
     {
         return "AccountSettings";
     }
-//    ????
-    @RequestMapping("/one")
-    public String one()
-    {
-        return "file";
-    }
-//    PurchaseHistory
+
+
     @RequestMapping("/PurchaseHistory")
     public String PurchaseHistory()
     {
         return "PurchaseHistory";
     }
-//    ????
-    @RequestMapping("/two")
-    public String two()
+
+    @RequestMapping("/SignUp")
+    public String SignUp()
+
     {
-        return "test";
+        return "SignUp";
     }
-//    ??????
-    @RequestMapping("/three")
-    public String three()
-    {
-        return "test2";
+
+
+    @RequestMapping(value = "/login")
+    public String Login(Model model) {
+        model.addAttribute("users", new Users());
+
+        return "Login";
+    }
+
+    @PostMapping("/login")
+    public String getLog(@ModelAttribute Users user, Model model) {
+
+        model.addAttribute("users", user);
+
+
+        boolean Existdb = repo.existsUsersByUsernameAndPassword(user.getUsername(),user.getPassword());
+
+        if(Existdb)
+        {
+            System.out.println("main");
+            return "MainPage";
+        }
+        else {
+            System.out.println("no user");
+            model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
+            return "Login";
+        }
+
+    }
+
+
+    @PostMapping("/SignUp")
+    public String getSubmit(@ModelAttribute Users user, Model model) {
+        model.addAttribute("users", user);
+        System.out.println("3");
+        boolean Existdb = repo.existsUsersByUsername(user.getUsername());
+        System.out.println("4");
+        if(Existdb)
+        {
+            System.out.println("exist");
+            model.addAttribute("message", "Error: Username exist in the Database");
+            return "SignUp";
+        }
+        else{
+            System.out.println("new user added");
+            repo.save(user);
+            return "Login";
+        }
+
     }
 
 }
