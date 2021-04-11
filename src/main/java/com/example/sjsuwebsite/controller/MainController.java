@@ -14,6 +14,7 @@ public class MainController {
 
     int[] num = {0,0,0,0,0,0,0,0,0};
 
+//    MainPage
     @RequestMapping("/MainPage")
     public String MainPage(Model model) {
 
@@ -23,7 +24,6 @@ public class MainController {
     }
 
     @PostMapping("/MainPage")
-
     public String MainPage2(@RequestParam(name = "buttonName") int change, Model model){
 
         num[change] = num[change] - 1;
@@ -33,26 +33,43 @@ public class MainController {
 
         return "MainPage";
     }
+
+//    ItemPage
+    @RequestMapping("/ItemPage")
+    public String ItemPage(Model model) {
+
+        model.addAttribute("num", num);
+
+        return "ItemPage";
+    }
+
+//    CartPage
     @RequestMapping("/Cart")
     public String Cart()
     {
         return "cart";
     }
+//    AccountSettings
     @RequestMapping("/AccountSettings")
     public String AccountSettings()
     {
         return "AccountSettings";
     }
+
+
     @RequestMapping("/PurchaseHistory")
     public String PurchaseHistory()
     {
         return "PurchaseHistory";
     }
+
     @RequestMapping("/SignUp")
     public String SignUp()
+
     {
         return "SignUp";
     }
+
 
     @RequestMapping(value = "/login")
     public String Login(Model model) {
@@ -100,6 +117,7 @@ public class MainController {
             repo.save(user);
             return "Login";
         }
+
     }
 
 }
