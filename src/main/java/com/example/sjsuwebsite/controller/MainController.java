@@ -1,7 +1,7 @@
 package com.example.sjsuwebsite.controller;
 
-import com.example.sjsuwebsite.model.Users;
-import com.example.sjsuwebsite.repository.UserRepository;
+import com.example.sjsuwebsite.Model.Users;
+import com.example.sjsuwebsite.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,7 +78,7 @@ public class MainController {
         return "Login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/Login")
     public String getLog(@ModelAttribute Users user, Model model) {
 
         model.addAttribute("users", user);

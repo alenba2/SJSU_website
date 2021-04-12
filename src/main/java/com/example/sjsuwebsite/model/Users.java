@@ -1,7 +1,11 @@
-package com.example.sjsuwebsite.model;
+package com.example.sjsuwebsite.Model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "users")
 public class Users {
-
+    @Id
     public String id;
     public String username;
     public String password;
