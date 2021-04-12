@@ -1,6 +1,7 @@
 <!doctype html>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html lang="en">
@@ -54,17 +55,17 @@
 <%-- Description--%>
 <div id="TextBox">
     <a>
-        Item Name: Banana
+        Item Name: ${Item.getName()}
     </a>
     <br>
     <br>
     <a>
-        Cost: <a style="color:red">$13.01</a>
+        Cost: <a style="color:red">$<f:formatNumber type="number" pattern="0.00" value="${Item.getCost()}"/></a>
     </a>
     <br>
     <br>
     <a>
-        Description: This is a godly Banana from the Bahamas, which tells no tales of blood and glory. This banana should be in a museum instead of the market
+        Description: ${Item.getDescription()}
     </a>
 </div>
 
