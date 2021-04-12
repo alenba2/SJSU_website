@@ -1,4 +1,4 @@
-package com.example.sjsuwebsite.Model;
+package com.example.sjsuwebsite.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

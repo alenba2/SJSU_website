@@ -1,6 +1,6 @@
-package com.example.sjsuwebsite.Repository;
+package com.example.sjsuwebsite.repository;
 
-import com.example.sjsuwebsite.Model.Users;
+import com.example.sjsuwebsite.model.Users;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface UserRepository extends MongoRepository<Users, String> {
