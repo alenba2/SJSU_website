@@ -1,6 +1,7 @@
 <!doctype html>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html lang="en">
@@ -32,7 +33,7 @@
 
 <div class="card-columns container offset" >
     <form:form action="/" method="post">
-    <c:forEach var = "i" begin = "0" end = "8">
+    <c:forEach var = "i" begin = "0" end = "0">
 
 
     <input type="hidden" id="buttonName" value="" name="buttonName">
@@ -40,8 +41,12 @@
         <div class="card" >
             <img class="card-img-top" src="..." width="200" height="250">
             <div class="card-body text-center">
-                <p class="card-text">Item Name: ${itemName} </p>
-                <p class="card-text">Total: ${cost} </p>
+                <p class="card-text">Item Name: ${Item.get(0).getName()} </p>
+                <p class="card-text">Total: $
+
+                    <f:formatNumber type="number" pattern="0.00" value="${Item.get(0).getCost()}"/>
+
+                </p>
             </div>
         </div>
 

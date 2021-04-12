@@ -1,5 +1,6 @@
 package com.example.sjsuwebsite.controller;
 
+import com.example.sjsuwebsite.Items;
 import com.example.sjsuwebsite.model.Users;
 import com.example.sjsuwebsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,28 +8,41 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @Controller
 public class MainController {
     @Autowired
     UserRepository repo;
 
-    int[] num = {0,0,0,0,0,0,0,0,0};
+    int[] cart = {0,0,0,0,0,0,0,0,0};
+    ArrayList<Items> itemarr = new ArrayList<>(10);
+
+    public MainController(){
+        System.out.println("hit1");
+        itemarr.add(new Items("Banana",10,"I am a banana", 10.00));
+    }
+
+    public MainController(UserRepository repo)
+    {
+        this.repo = repo;
+        System.out.println("hit2");
+    }
 
 //    MainPage
     @RequestMapping("/MainPage")
     public String MainPage(Model model) {
 
-        model.addAttribute("num", num);
-
+        model.addAttribute("num", cart);
+        model.addAttribute("Item",itemarr);
         return "MainPage";
     }
 
     @PostMapping("/MainPage")
     public String MainPage2(@RequestParam(name = "buttonName") int change, Model model){
 
-        num[change] = num[change] - 1;
 
-        model.addAttribute("num", num);
+        model.addAttribute("num", cart);
         System.out.println("hit");
 
         return "MainPage";
@@ -36,9 +50,9 @@ public class MainController {
 
 //    ItemPage
     @RequestMapping("/ItemPage")
-    public String ItemPage(Model model) {
-
-        model.addAttribute("num", num);
+    public String ItemPage(@RequestParam(name= "ItemNumber") int ItemNumber,Model model) {
+        model.addAttribute("Item", itemarr.get(ItemNumber));
+        model.addAttribute("num", cart);
 
         return "ItemPage";
     }
@@ -49,6 +63,7 @@ public class MainController {
     {
         return "cart";
     }
+
 //    AccountSettings
     @RequestMapping("/AccountSettings")
     public String AccountSettings()
@@ -71,7 +86,7 @@ public class MainController {
     }
 
 
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/Login")
     public String Login(Model model) {
         model.addAttribute("users", new Users());
 
