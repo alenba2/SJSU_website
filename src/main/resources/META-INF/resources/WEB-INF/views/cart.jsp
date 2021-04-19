@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +15,7 @@
 
 <style>
     .card{
-        background-color: #F8F9FB;
+        background-color: #f8f9fb;
     <!-- -->
     }
 </style>
@@ -22,54 +26,66 @@
 
 
 <div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+    <c:forEach var="item" items="${cartArrList}">
 
-    <%! int loopCount; %>
-    <%for (loopCount = 0; loopCount < 4; loopCount++) { %>
-    <div class="card my-3">
-        <div class="m-2 p-2 row">
-            <div class="row">
+        <div class="card my-3">
+            <div class="m-2 p-2 row">
+                <div class="row">
 
-                <div class="col-2">
-                    <img src="https://i5.walmartimages.com/asr/229226f5-c5a9-425b-b411-9484aa23e845_1.06a852888d9c1b507db92f8a013b466b.jpeg"
-                         class="p-1 img-thumbnail">
+                    <div class="col-2">
+                        <img src=${item.getImageLocation()} class="p-1 img-thumbnail">
+                    </div>
+
+                    <div class="col-10">
+                        <h2>${item.getName()}</h2>
+                        <p>${item.getDescription()}</p>
+                    </div>
+
                 </div>
 
-                <div class="col-10">
-                    <h2>Item Name</h2>
-                </div>
+                <div class="row ">
+                    <div class="col-2">
+                        <div class="row">
+                            <div class="col text-center">
+                                <button class="btn btn-primary" type="submit">-</button>
+                            </div>
+                            <div class="col text-center">
 
-            </div>
+                                <h3>${item.getQuantity()}</h3>
 
-            <div class="row ">
-                <div class="col-2">
-                    <div class="row">
-                        <div class="col text-center">
-                            <button class="btn btn-primary" type="submit">-</button>
-                        </div>
-                        <div class="col text-center">
-                            <h3>#</h3>
-                        </div>
-                        <div class="col text-center">
-                            <button class="btn btn-primary" type="submit">+</button>
+                            </div>
+                            <div class="col text-center">
+                                <button class="btn btn-primary" type="submit">+</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-10">
-                    <div class="card-body text-end">
-                        <p class="card-text">price</p>
+                    <div class="col-10">
+                        <div class="card-body text-end">
+
+                            <p class="card-text"><fmt:formatNumber value = "${item.getCost()}" type = "currency"/>
+                            </p>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <%}%>
+
+    </c:forEach>
+
 
     <div class="text-end">
         <div class="col pt-1">
             <button class="btn btn-secondary" type="submit">Checkout</button>
         </div>
     </div>
+
+
 </div>
 
 

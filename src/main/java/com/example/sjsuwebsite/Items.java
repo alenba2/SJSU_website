@@ -1,16 +1,21 @@
 package com.example.sjsuwebsite;
 
+
 public class Items {
     private String Name;
-    private int Stock;
+    private int Quantity;
     private String Description;
     private double Cost;
+    private String imageLocation;
 
-    public Items(String name, int stock, String description,double cost) {
+    public Items(String name, int quantity, String description,double cost) {
         Name = name;
-        Stock = stock;
+        Quantity = quantity;
         Description = description;
         Cost = cost;
+
+        imageLocation = "/images/items/"+name+".png";
+
     }
 
     public double getCost() {
@@ -29,12 +34,12 @@ public class Items {
         Name = name;
     }
 
-    public int getStock() {
-        return Stock;
+    public int getQuantity() {
+        return Quantity;
     }
 
-    public void setStock(int stock) {
-        Stock = stock;
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
     }
 
     public String getDescription() {
@@ -43,5 +48,8 @@ public class Items {
 
     public void setDescription(String description) {
         Description = description;
+    }
+    public String getImageLocation(){
+        return imageLocation;
     }
 }
