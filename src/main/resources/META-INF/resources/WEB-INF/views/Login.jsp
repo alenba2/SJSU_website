@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center form_container">
-                <form:form style="position:fixed;width:25%; top: 200px" action="/login" method="post">
+                <form:form style="position:fixed;width:25%; top: 200px" action="/Login" method="post">
                     <br>
                     <br>
 

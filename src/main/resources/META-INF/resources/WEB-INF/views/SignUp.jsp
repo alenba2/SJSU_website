@@ -67,7 +67,7 @@
                     <div class="d-grid gap-2">
                         <button  id="submit" class="btn btn-warning rounded-pill">Sign Up</button>
                         <div class="d-flex justify-content-center">
-                            <button onclick="location.href ='login'" type="button"  class="btn btn-warning rounded-pill">Login</button>
+                            <button onclick="location.href ='Login'" type="button"  class="btn btn-warning rounded-pill">Login</button>
                         </div>
 
                     </div>

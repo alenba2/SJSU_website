@@ -21,6 +21,11 @@ public class MainController {
     public MainController(){
         System.out.println("hit1");
         itemarr.add(new Items("Banana",10,"I am a banana", 10.00));
+        itemarr.add(new Items("apple",10,"I am an apple", 20.00));
+        for(Items i : itemarr){
+            System.out.println(i.getName());
+        }
+        System.out.println("hit11");
     }
 
     public MainController(UserRepository repo)
@@ -86,7 +91,7 @@ public class MainController {
     }
 
 
-    @RequestMapping(value = "/Login")
+    @RequestMapping(value = {"/Login","/"})
     public String Login(Model model) {
         model.addAttribute("users", new Users());
 
