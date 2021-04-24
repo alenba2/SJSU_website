@@ -25,19 +25,19 @@
         <img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
     </a>
 
-    <a class="navbar-brand" >
-        <button class="btn btn-primary" style="height: 44px">
+    <form class="form-inline" >
+        <a class="btn btn-primary" style="height: 44px" >
             Logout
-        </button>
+        </a>
 
-        <button class="btn btn-primary">
+        <a class="btn btn-primary" >
             <img src="/images/cog-8x.png" width="30" height="30" class="d-inline-block align-top" alt="cog">
-        </button>
+        </a>
 
-        <button class="btn btn-primary">
+        <a href = './Cart' >
             <img src="/images/cart-8x.png" width="30" height="30" class="d-inline-block align-top" alt="cart">
-        </button>
-    </a>
+        </a>
+    </form>
 </nav>
 
 
