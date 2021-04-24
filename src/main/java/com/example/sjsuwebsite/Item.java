@@ -1,24 +1,23 @@
 package com.example.sjsuwebsite;
 
 
-public class Items {
+public class Item implements Product {
     private String Name;
     private int Quantity;
     private String Description;
     private double Cost;
     private String imageLocation;
 
-    public Items(String name, int quantity, String description,double cost) {
+    public Item(String name, int quantity, String description, double cost) {
         Name = name;
         Quantity = quantity;
         Description = description;
         Cost = cost;
 
         imageLocation = "/images/items/"+name+".png";
-
     }
 
-    public double getCost() {
+    public double getPrice() {
         return Cost;
     }
 
@@ -28,6 +27,10 @@ public class Items {
 
     public String getName() {
         return Name;
+    }
+
+    public void printItem(){
+        System.out.println("Item class: " + Name);
     }
 
     public void setName(String name) {

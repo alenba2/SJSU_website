@@ -1,6 +1,8 @@
 package com.example.sjsuwebsite.controller;
 
-import com.example.sjsuwebsite.Items;
+import com.example.sjsuwebsite.Bundle;
+import com.example.sjsuwebsite.Item;
+import com.example.sjsuwebsite.ItemSystem;
 import com.example.sjsuwebsite.model.Users;
 import com.example.sjsuwebsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +17,40 @@ public class MainController {
     @Autowired
     UserRepository repo;
 
+    ItemSystem ItemList = new ItemSystem();
+
+
     int[] cart = {0,0,0,0,0,0,0,0,0};
-    ArrayList<Items> itemarr = new ArrayList<>(10);
-    ArrayList<Items> cartArrList = new ArrayList<>(10);
+    ArrayList<Item> itemarr = new ArrayList<>(10);
+    ArrayList<Item> cartArrList = new ArrayList<>(10);
 
     public MainController(){
-        System.out.println("hit1");
-        itemarr.add(new Items("Banana",10,"I am a banana", 10.00));
 
-        cartArrList.add(new Items("Banana",10,"Banana description", 10.00));
-        cartArrList.add(new Items("Apple",7,"Apple description. " +
+        itemarr.add(new Item("Banana",10,"I am a banana", 10.00));
+
+        cartArrList.add(new Item("Banana",10,"Banana description", 10.00));
+        cartArrList.add(new Item("Apple",7,"Apple description. " +
                 "this is a super long description of an item to test the formatting," +
                 "alignment, etc of description. " +
                 "There are many different types of apples, for example:" +
                 "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8));
+
+        // Composite Design
+        Item item1 = new Item("Apple",1,"good Apple",10);
+        Item item2 = new Item("Bad Apple", 1, "Bad Apple", 11);
+
+//        Bundle Class stores multiple items at once in an ArrayList
+        Bundle bundle = new Bundle();
+        bundle.addItem(item1);
+        bundle.addItem(item2);
+
+//        ItemList is able to store Item and Bundle class together
+        ItemList.add(new Item("Banana",10,"Banana description", 10.00));
+        ItemList.add(bundle);
+
+//        Prints Items
+        ItemList.printItem();
+
     }
 
 
