@@ -17,11 +17,20 @@ public class MainController {
 
     int[] cart = {0,0,0,0,0,0,0,0,0};
     ArrayList<Items> itemarr = new ArrayList<>(10);
+    ArrayList<Items> cartArrList = new ArrayList<>(10);
 
     public MainController(){
         System.out.println("hit1");
         itemarr.add(new Items("Banana",10,"I am a banana", 10.00));
+
+        cartArrList.add(new Items("Banana",10,"Banana description", 10.00));
+        cartArrList.add(new Items("Apple",7,"Apple description. " +
+                "this is a super long description of an item to test the formatting," +
+                "alignment, etc of description. " +
+                "There are many different types of apples, for example:" +
+                "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8));
     }
+
 
     public MainController(UserRepository repo)
     {
@@ -59,8 +68,9 @@ public class MainController {
 
 //    CartPage
     @RequestMapping("/Cart")
-    public String Cart()
+    public String Cart(Model model)
     {
+        model.addAttribute("cartArrList", cartArrList);
         return "cart";
     }
 
