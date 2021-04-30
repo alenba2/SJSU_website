@@ -95,6 +95,19 @@ public class MainController {
         model.addAttribute("cartArrList", cartArrList);
         return "cart";
     }
+    @PostMapping(value="/Cart", params = {"quantity", "itemName"})
+    public String updateCart(Model model, @RequestParam int quantity, @RequestParam String itemName)
+    {
+        Item currentItem=null;
+        for(Item item:cartArrList)
+        {
+            if (item.getName().equals(itemName))
+                currentItem = item;
+        }
+        currentItem.setQuantity(quantity);
+        Cart(model);
+        return "cart";
+    }
 
 //    AccountSettings
     @RequestMapping("/AccountSettings")

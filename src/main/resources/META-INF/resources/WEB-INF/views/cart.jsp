@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 
 <html lang="en">
@@ -14,7 +15,7 @@
 </head>
 
 <style>
-    .card{
+    .card {
         background-color: #f8f9fb;
     <!-- -->
     }
@@ -24,13 +25,14 @@
 <body>
 
 
-
 <div class="container">
     <br>
     <br>
     <br>
     <br>
+
     <c:forEach var="item" items="${cartArrList}">
+
 
         <div class="card my-3">
             <div class="m-2 p-2 row">
@@ -48,26 +50,28 @@
                 </div>
 
                 <div class="row ">
-                    <div class="col-2">
-                        <div class="row">
-                            <div class="col text-center">
-                                <button class="btn btn-primary" type="submit">-</button>
-                            </div>
-                            <div class="col text-center">
+                    <div class="col-2" align="center">
+                        <div class="row ">
 
-                                <h3>${item.getQuantity()}</h3>
-
-                            </div>
                             <div class="col text-center">
-                                <button class="btn btn-primary" type="submit">+</button>
+                                <form id="updateCart" action="Cart" method="post">
+
+                                    <label>Quantity: </label>
+                                    <input type="number" name="quantity" style="width: 50px;" value="${item.getQuantity()}">
+                                    <input type="submit" value="Submit"/>
+                                    <input type="hidden" id="itemName" name="itemName" value="${item.getName()}"/>
+
+                                <%--                                    <jsp:param name="item" value="${item}"/>--%>
+                                </form>
                             </div>
+
                         </div>
                     </div>
 
                     <div class="col-10">
                         <div class="card-body text-end">
 
-                            <p class="card-text"><fmt:formatNumber value = "${item.getCost()}" type = "currency"/>
+                            <p class="card-text"><fmt:formatNumber value="${item.getCost()}" type="currency"/>
                             </p>
 
                         </div>
@@ -87,7 +91,6 @@
 
 
 </div>
-
 
 
 <jsp:include page="NavBar.jsp"/>
