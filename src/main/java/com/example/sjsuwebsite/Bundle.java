@@ -6,7 +6,15 @@ public class Bundle implements Product{
     ArrayList<Item> items = new ArrayList<>();
 
     public double getPrice() {
-        return 0;
+        double price = 0.0;
+        for(Item item: items)
+        {
+            price = price + item.getCost();
+        }
+
+        price = price - (price*0.1);
+
+        return price;
     }
 
     public void addItem(Item item)
@@ -24,5 +32,10 @@ public class Bundle implements Product{
         }
 
         System.out.println(" )");
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 }
