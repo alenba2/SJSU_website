@@ -31,7 +31,7 @@
     <br>
     <br>
 
-    <c:forEach var="item" items="${cartArrList}">
+    <c:forEach var="itemInCart" items="${cartArrList}">
 
 
         <div class="card my-3">
@@ -39,12 +39,12 @@
                 <div class="row">
 
                     <div class="col-2">
-                        <img src=${item.getImageLocation()} class="p-1 img-thumbnail">
+                        <img src=${itemInCart.getImageLocation()} class="p-1 img-thumbnail">
                     </div>
 
                     <div class="col-10">
-                        <h2>${item.getName()}</h2>
-                        <p>${item.getDescription()}</p>
+                        <h2>${itemInCart.getName()}</h2>
+                        <p>${itemInCart.getDescription()}</p>
                     </div>
 
                 </div>
@@ -56,12 +56,19 @@
                             <div class="col text-center">
                                 <form id="updateCart" action="Cart" method="post">
 
-                                    <label>Quantity: </label>
-                                    <input type="number" name="quantity" style="width: 50px;" value="${item.getQuantity()}">
-                                    <input type="submit" value="Submit"/>
-                                    <input type="hidden" id="itemName" name="itemName" value="${item.getName()}"/>
+                                    <c:forEach var="stockItem" items="${itemarr}">
+                                        <c:if test ="${stockItem.getName().equals(itemInCart.getName())}">
+                                            <c:set var = "itemInStock" scope = "page" value = "${stockItem}"/>
+                                        </c:if>
+                                    </c:forEach>
 
-                                <%--                                    <jsp:param name="item" value="${item}"/>--%>
+                                    <label>Quantity: </label>
+                                    <input type="number" name="quantity" style="width: 50px;" value="${itemInCart.getQuantity()}">
+                                    <p>In Stock: ${itemInStock.getQuantity()}</p>
+                                    <input type="submit" value="Submit"/>
+                                    <input type="hidden" id="itemName" name="itemName" value="${itemInCart.getName()}"/>
+
+                                        <%--                                    <jsp:param name="item" value="${item}"/>--%>
                                 </form>
                             </div>
 
@@ -71,7 +78,8 @@
                     <div class="col-10">
                         <div class="card-body text-end">
 
-                            <p class="card-text"><fmt:formatNumber value="${item.getCost()}" type="currency"/>
+                            <p class="card-text">(<fmt:formatNumber value="${itemInCart.getCost()}" type="currency"/>x) -
+                                <fmt:formatNumber value="${itemInCart.getQuantity()*itemInCart.getCost()}" type="currency"/>
                             </p>
 
                         </div>
