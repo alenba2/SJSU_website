@@ -36,28 +36,35 @@ public class MainController {
                 "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8));
 
         // Composite Design
-        Item item1 = new Item("Apple",1,"good Apple",10);
-        Item item2 = new Item("Bad Apple", 1, "Bad Apple", 11);
+        Item item1 = new Item("Banana",10,"I am a banana", 10.00);
+        Item item2 = new Item("Banana",10,"Banana description", 10.00);
+        Item item3 = new Item("Apple",7,"Apple description. " +
+                "this is a super long description of an item to test the formatting," +
+                "alignment, etc of description. " +
+                "There are many different types of apples, for example:" +
+                "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8);
 
 //        Bundle Class stores multiple items at once in an ArrayList
-        Bundle bundle = new Bundle();
-        bundle.addItem(item1);
-        bundle.addItem(item2);
+//        Bundle bundle = new Bundle();
+//        bundle.addItem(item1);
+//        bundle.addItem(item2);
 
 //        ItemList is able to store Item and Bundle class together
-        ItemList.add(new Item("Banana",10,"Banana description", 10.00));
-        ItemList.add(bundle);
+        ItemList.add(item1);
+        ItemList.add(item2);
+        ItemList.add(item3);
+//        ItemList.add(bundle);
 
 //        Prints Items
         ItemList.printItem();
 
-    }
+        System.out.println(ItemList.get(1).getName());
 
+    }
 
     public MainController(UserRepository repo)
     {
         this.repo = repo;
-        System.out.println("hit2");
     }
 
 //    MainPage

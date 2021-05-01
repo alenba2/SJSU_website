@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemSystem implements Product{
-    private List<Product> list = new ArrayList<Product>();
+    private List<Product> list = new ArrayList<>();
 
     public void printItem()
     {
@@ -14,8 +14,25 @@ public class ItemSystem implements Product{
         }
     }
 
+    public String getName()
+    {
+        String name = "";
+
+        for(Product prod: list)
+        {
+            name = name + prod.getName() + " ";
+        }
+
+        return name;
+    }
+
     public void add(Product prod)
     {
         list.add(prod);
+    }
+
+    public Product get(int Number)
+    {
+        return list.get(Number);
     }
 }
