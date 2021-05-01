@@ -17,7 +17,7 @@ public class Item implements Product {
         imageLocation = "/images/items/"+name+".png";
     }
 
-    public double getPrice() {
+    public double getCost() {
         return Cost;
     }
 
