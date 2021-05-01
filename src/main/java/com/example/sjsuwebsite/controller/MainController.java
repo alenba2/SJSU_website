@@ -46,18 +46,16 @@ public class MainController {
         Item item2 = new Item("Bad Apple", 1, "Bad Apple", 11);
 
 //        Bundle Class stores multiple items at once in an ArrayList
-//        Bundle bundle = new Bundle();
-//        bundle.addItem(item1);
-//        bundle.addItem(item2);
+        Bundle bundle = new Bundle();
+        bundle.addItem(item1);
+        bundle.addItem(item2);
 
 //        ItemList is able to store Item and Bundle class together
         ItemList.add(item1);
-//        ItemList.add(bundle);
+        ItemList.add(bundle);
 
 //        Prints Items
         ItemList.printItem();
-
-        System.out.println(ItemList.get(0).getName());
 
     }
 
@@ -81,7 +79,6 @@ public class MainController {
 
 
         model.addAttribute("num", cart);
-        System.out.println("hit");
 
         return "MainPage";
     }

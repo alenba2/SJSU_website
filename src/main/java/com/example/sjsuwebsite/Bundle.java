@@ -5,15 +5,13 @@ import java.util.ArrayList;
 public class Bundle implements Product{
     ArrayList<Item> items = new ArrayList<>();
 
-    public double getPrice() {
+    public double getCost() {
         double price = 0.0;
         for(Item item: items)
         {
             price = price + item.getCost();
         }
-
         price = price - (price*0.1);
-
         return price;
     }
 
@@ -25,17 +23,22 @@ public class Bundle implements Product{
     @Override
     public void printItem() {
         System.out.println("Bundle Class:( ");
-
         for(Item item: items)
         {
             item.printItem();
         }
-
         System.out.println(" )");
     }
 
     @Override
     public String getName() {
-        return null;
+        String name = "Bundle Special: ";
+
+        for(Item item: items)
+        {
+            name = name + " " + item.getName() + " ";
+        }
+
+        return name;
     }
 }
