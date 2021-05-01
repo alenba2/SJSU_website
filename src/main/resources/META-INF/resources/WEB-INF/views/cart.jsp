@@ -68,7 +68,7 @@
                                     <input type="submit" value="Submit"/>
                                     <input type="hidden" id="itemName" name="itemName" value="${itemInCart.getName()}"/>
 
-                                        <%--                                    <jsp:param name="item" value="${item}"/>--%>
+
                                 </form>
                             </div>
 
