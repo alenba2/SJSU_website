@@ -17,10 +17,12 @@ public class MainController {
     @Autowired
     UserRepository repo;
 
+    //Our ItemList that lists all the items in the store
     ItemSystem ItemList = new ItemSystem();
 
+    //Cart List that lists all the items the user wants to buy
+    ItemSystem CartList = new ItemSystem();
 
-    int[] cart = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     ArrayList<Item> itemarr = new ArrayList<>(10);
     ArrayList<Item> cartArrList = new ArrayList<>(10);
 
@@ -43,8 +45,8 @@ public class MainController {
 
         // Composite Design
         Item item1 = new Item("Strawberry", 10, "I am a strawberry", 5);
-        Item item2 = new Item("Banana", 10, "Banana description", 10.00);
-        Item item3 = new Item("Apple", 7, "Apple description. " +
+        Item item2 = new Item("Banana", 10, "I am a Banana", 10.00);
+        Item item3 = new Item("Apple", 7, "I am an Apple. " +
                 "this is a super long description of an item to test the formatting," +
                 "alignment, etc of description. " +
                 "There are many different types of apples, for example:" +
@@ -71,23 +73,23 @@ public class MainController {
 
     public MainController(UserRepository repo) {
         this.repo = repo;
-        System.out.println("hit2");
     }
 
     //    MainPage
     @RequestMapping("/MainPage")
     public String MainPage(Model model) {
 
-        model.addAttribute("num", ItemList);
+        model.addAttribute("Cart", CartList);
         model.addAttribute("Item", ItemList);
+
         return "MainPage";
     }
 
     @PostMapping("/MainPage")
     public String MainPage2(@RequestParam(name = "buttonName") int change, Model model) {
 
-
-        model.addAttribute("num", cart);
+        model.addAttribute("CartList", CartList);
+        model.addAttribute("Item", ItemList);
 
         return "MainPage";
     }
@@ -95,8 +97,10 @@ public class MainController {
     //    ItemPage
     @RequestMapping("/ItemPage")
     public String ItemPage(@RequestParam(name = "ItemNumber") int ItemNumber, Model model) {
-        model.addAttribute("Item", itemarr.get(ItemNumber));
-        model.addAttribute("num", cart);
+
+        model.addAttribute("Item", ItemList.get(ItemNumber));
+
+//        model.addAttribute("num", cart);
 
         return "ItemPage";
     }

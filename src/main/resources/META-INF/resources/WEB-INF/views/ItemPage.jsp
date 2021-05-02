@@ -51,7 +51,7 @@
 <%-- --------- Display item --------------------   -----------------      --%>
 
 <%-- Image --%>
-<img src="..." width="200" height="250" id="ItemPic">
+<img src="./images/items/${Item.getName()}.png" width="200" height="250" id="ItemPic">
 <%-- Description--%>
 <div id="TextBox">
     <a>
@@ -73,15 +73,32 @@
 
 <div id="InventoryBox" style="text-align: center">
     <form:form>
-        <a>Item Availability: <a style="color: green">Yes</a></a>
+        <a>Item Availability:
+            <a >
+                <c:choose>
+                    <c:when test="${Item.getStock()}">
+                        <a style="color:Green">
+                            In Stock
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a style="color:Red">
+                            Out of Stock
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </a>
+        </a>
         <br>
         <br>
         <a>
             <label for="Stock">Stock: </label>
             <select name="Stock" id="Stock">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option default value="0">0</option>
+
+                <c:forEach var = "i" begin = "1" end = "${Item.getQuantity()}">
+                    <option value="${i}">${i}</option>
+                </c:forEach>
             </select>
         </a>
         <br>

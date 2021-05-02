@@ -45,7 +45,7 @@
                 <p class="card-text">Total: $
                     <f:formatNumber type="number" pattern="0.00" value="${Item.get(i).getCost()}"/>
                 </p>
-                <a href="./ItemPage?ItemNumber=0" class="btn btn-primary stretched-link">See Item Details</a>
+                <a href="./ItemPage?ItemNumber=${i}" class="btn btn-primary stretched-link">See Item Details</a>
             </div>
         </div>
 

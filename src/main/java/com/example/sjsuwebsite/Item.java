@@ -45,6 +45,17 @@ public class Item implements Product {
         Quantity = quantity;
     }
 
+    public Boolean getStock()
+    {
+        if(getQuantity()>0)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public String getDescription() {
         return Description;
     }
