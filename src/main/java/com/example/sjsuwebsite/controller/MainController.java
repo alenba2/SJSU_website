@@ -42,20 +42,29 @@ public class MainController {
                 "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8));
 
         // Composite Design
-        Item item1 = new Item("Strawberry Composite Design", 10, "I am a strawberry", 5);
-        Item item2 = new Item("Bad Apple", 1, "Bad Apple", 11);
+        Item item1 = new Item("Strawberry", 10, "I am a strawberry", 5);
+        Item item2 = new Item("Banana", 10, "Banana description", 10.00);
+        Item item3 = new Item("Apple", 7, "Apple description. " +
+                "this is a super long description of an item to test the formatting," +
+                "alignment, etc of description. " +
+                "There are many different types of apples, for example:" +
+                "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8);
+        Item item4 = new Item ("Grape", 6,"Green Grapes that has a sweet taste", 7);
+        Item item5 = new Item ("Orange", 5, "Oranges that are good for your Vitamin C", 4);
 
 //        Bundle Class stores multiple items at once in an ArrayList
         Bundle bundle = new Bundle();
         bundle.addItem(item1);
         bundle.addItem(item2);
+        bundle.addItem(item3);
 
 //        ItemList is able to store Item and Bundle class together
-        ItemList.add(item1);
         ItemList.add(bundle);
-
-//        Prints Items
-        ItemList.printItem();
+        ItemList.add(item1);
+        ItemList.add(item2);
+        ItemList.add(item3);
+        ItemList.add(item4);
+        ItemList.add(item5);
 
     }
 

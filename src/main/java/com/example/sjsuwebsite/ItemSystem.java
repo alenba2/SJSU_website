@@ -35,4 +35,9 @@ public class ItemSystem implements Product{
     {
         return list.get(Number);
     }
+
+    public int length()
+    {
+        return list.size();
+    }
 }

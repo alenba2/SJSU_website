@@ -33,26 +33,25 @@
 
 <div class="card-columns container offset" >
     <form:form action="/" method="post">
-    <c:forEach var = "i" begin = "0" end = "1">
+    <c:forEach var = "i" begin = "0" end = "${Item.length() - 1}">
 
 
     <input type="hidden" id="buttonName" value="" name="buttonName">
 
         <div class="card" >
-            <img class="card-img-top" src="..." width="200" height="250">
+            <img class="card-img-top" src="./images/items/${Item.get(i).getName()}.png" width="200" height="250">
             <div class="card-body text-center">
                 <p class="card-text">Item Name: ${Item.get(i).getName()} </p>
                 <p class="card-text">Total: $
                     <f:formatNumber type="number" pattern="0.00" value="${Item.get(i).getCost()}"/>
                 </p>
-                <a href="./ItemPage?ItemNumber=0" class="btn btn-primary stretched-link">Go somewhere</a>
+                <a href="./ItemPage?ItemNumber=0" class="btn btn-primary stretched-link">See Item Details</a>
             </div>
         </div>
 
 
     </c:forEach>
     </form:form>
-
 
 </div>
 

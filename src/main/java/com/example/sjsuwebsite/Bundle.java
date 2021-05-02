@@ -22,7 +22,9 @@ public class Bundle implements Product{
 
     @Override
     public void printItem() {
+
         System.out.println("Bundle Class:( ");
+
         for(Item item: items)
         {
             item.printItem();
@@ -32,13 +34,6 @@ public class Bundle implements Product{
 
     @Override
     public String getName() {
-        String name = "Bundle Special: ";
-
-        for(Item item: items)
-        {
-            name = name + " " + item.getName() + " ";
-        }
-
-        return name;
+        return "Bundle";
     }
 }
