@@ -31,6 +31,15 @@ public class ItemSystem implements Product{
         return name;
     }
 
+    @Override
+    public void setQuantity(int quantity) {
+    }
+
+    @Override
+    public int getQuantity() {
+        return -1;
+    }
+
     public Product get(int Number)
     {
         return list.get(Number);
@@ -40,4 +49,6 @@ public class ItemSystem implements Product{
     {
         return list.size();
     }
+
+
 }

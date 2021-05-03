@@ -3,6 +3,7 @@ package com.example.sjsuwebsite.controller;
 import com.example.sjsuwebsite.Bundle;
 import com.example.sjsuwebsite.Item;
 import com.example.sjsuwebsite.ItemSystem;
+import com.example.sjsuwebsite.Product;
 import com.example.sjsuwebsite.model.Users;
 import com.example.sjsuwebsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class MainController {
 
     //Cart List that lists all the items the user wants to buy
     ItemSystem CartList = new ItemSystem();
+
+    //turns on message on MainPage
+    boolean message = false;
 
     ArrayList<Item> itemarr = new ArrayList<>(10);
     ArrayList<Item> cartArrList = new ArrayList<>(10);
@@ -61,6 +65,7 @@ public class MainController {
         bundle.addItem(item1);
         bundle.addItem(item2);
         bundle.addItem(item3);
+        bundle.setQuantity(7);
 
 //        ItemList is able to store Item and Bundle class together
         ItemList.add(bundle);
@@ -84,14 +89,9 @@ public class MainController {
         model.addAttribute("Cart", CartList);
         model.addAttribute("Item", ItemList);
 
-        return "MainPage";
-    }
+        model.addAttribute("message", message);
 
-    @PostMapping("/MainPage")
-    public String MainPage2(@RequestParam(name = "buttonName") int change, Model model) {
-
-        model.addAttribute("CartList", CartList);
-        model.addAttribute("Item", ItemList);
+        message = false;
 
         return "MainPage";
     }
@@ -101,10 +101,27 @@ public class MainController {
     public String ItemPage(@RequestParam(name = "ItemNumber") int ItemNumber, Model model) {
 
         model.addAttribute("Item", ItemList.get(ItemNumber));
+        model.addAttribute("ItemNumber", ItemNumber);
 
 //        model.addAttribute("num", cart);
 
+
+
         return "ItemPage";
+    }
+
+    @PostMapping("/ItemPage")
+    public String ItemPage2( @RequestParam(name="Stock") int Stock,@RequestParam(name="ItemNumber") int ItemNumber) {
+
+        Product prod = ItemList.get(ItemNumber);
+        prod.setQuantity(Stock);
+        //Puts Item Selected to CartList
+        CartList.add(prod);
+
+        message = true;
+
+//        REDIRECTS TO MAIN PAGE
+        return "redirect:MainPage";
     }
 
     //    CartPage
@@ -173,6 +190,7 @@ public class MainController {
         boolean Existdb = repo.existsUsersByUsernameAndPassword(user.getUsername(), user.getPassword());
 
 
+
         if(Existdb)
         {
             System.out.println("main");
@@ -183,6 +201,7 @@ public class MainController {
             model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
             return "Login";
         }
+
 
     }
 
