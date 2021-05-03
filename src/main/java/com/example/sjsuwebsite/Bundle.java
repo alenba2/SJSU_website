@@ -18,17 +18,7 @@ public class Bundle implements Product{
 
     public int getQuantity()
     {
-        int min = items.get(0).getQuantity();
-
-        for(int i = 1;  i < items.size() ; i++)
-        {
-            if(min > items.get(i).getQuantity())
-            {
-                min = items.get(i).getQuantity();
-            }
-        }
-
-        return min;
+        return Quantity;
     }
 
     public Boolean getStock()

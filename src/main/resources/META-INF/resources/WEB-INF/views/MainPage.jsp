@@ -19,6 +19,13 @@
 
 
 <style>
+
+    .alertmessage{
+        margin-top: 100px;
+        left: 500px;
+        width: 1000px;
+    }
+
     .offset{
         margin-top: 100px;
         width: 1000px;
@@ -29,6 +36,16 @@
 
 <%-- --------- Display items --------------------   -----------------      --%>
 
+<c:choose>
+    <c:when test="${message}">
+        <div class="alert alert-warning alert-dismissible fade show alertmessage" role="alert">
+            <strong>Item has been put into cart</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:when>
+</c:choose>
 
 
 <div class="card-columns container offset" >

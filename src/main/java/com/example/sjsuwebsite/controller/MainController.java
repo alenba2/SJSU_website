@@ -26,6 +26,9 @@ public class MainController {
     //Cart List that lists all the items the user wants to buy
     ItemSystem CartList = new ItemSystem();
 
+    //turns on message on MainPage
+    boolean message = false;
+
     ArrayList<Item> itemarr = new ArrayList<>(10);
     ArrayList<Item> cartArrList = new ArrayList<>(10);
 
@@ -62,6 +65,7 @@ public class MainController {
         bundle.addItem(item1);
         bundle.addItem(item2);
         bundle.addItem(item3);
+        bundle.setQuantity(7);
 
 //        ItemList is able to store Item and Bundle class together
         ItemList.add(bundle);
@@ -85,14 +89,9 @@ public class MainController {
         model.addAttribute("Cart", CartList);
         model.addAttribute("Item", ItemList);
 
-        return "MainPage";
-    }
+        model.addAttribute("message", message);
 
-    @PostMapping("/MainPage")
-    public String MainPage2(@RequestParam(name = "buttonName") int change, Model model) {
-
-        model.addAttribute("CartList", CartList);
-        model.addAttribute("Item", ItemList);
+        message = false;
 
         return "MainPage";
     }
@@ -106,6 +105,8 @@ public class MainController {
 
 //        model.addAttribute("num", cart);
 
+
+
         return "ItemPage";
     }
 
@@ -117,7 +118,7 @@ public class MainController {
         //Puts Item Selected to CartList
         CartList.add(prod);
 
-//        model.addAttribute("num", cart);
+        message = true;
 
 //        REDIRECTS TO MAIN PAGE
         return "redirect:MainPage";
