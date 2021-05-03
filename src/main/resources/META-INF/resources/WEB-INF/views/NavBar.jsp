@@ -26,7 +26,7 @@
     </a>
 
     <form class="form-inline" >
-        <a class="btn btn-primary" style="height: 44px" >
+        <a class="btn btn-primary" style="height: 44px" onclick="href='/Login'" >
             Logout
         </a>
 

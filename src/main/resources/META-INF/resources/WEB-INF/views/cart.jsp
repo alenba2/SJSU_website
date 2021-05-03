@@ -67,7 +67,7 @@
                     <div class="col-10">
                         <div class="card-body text-end">
 
-                            <p class="card-text"><fmt:formatNumber value = "${item.getCost()}" type = "currency"/>
+                            <p class="card-text"><fmt:formatNumber value = "${item.getPrice()}" type = "currency"/>
                             </p>
 
                         </div>

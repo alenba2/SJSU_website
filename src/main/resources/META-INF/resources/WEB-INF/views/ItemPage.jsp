@@ -60,7 +60,7 @@
     <br>
     <br>
     <a>
-        Cost: <a style="color:red">$<f:formatNumber type="number" pattern="0.00" value="${Item.getCost()}"/></a>
+        Cost: <a style="color:red">$<f:formatNumber type="number" pattern="0.00" value="${Item.getPrice()}"/></a>
     </a>
     <br>
     <br>
