@@ -190,18 +190,18 @@ public class MainController {
         boolean Existdb = repo.existsUsersByUsernameAndPassword(user.getUsername(), user.getPassword());
 
 
-//        if(Existdb)
-//        {
-//            System.out.println("main");
-//            return "redirect";
-//        }
-//        } else {
-//            System.out.println("no user");
-//            model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
-//            return "Login";
-//        }
 
-        return "Login";
+        if(Existdb)
+        {
+            System.out.println("main");
+            return "redirect";
+        }
+        else {
+            System.out.println("no user");
+            model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
+            return "Login";
+        }
+
 
     }
 
