@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Bundle implements Product{
     ArrayList<Item> items = new ArrayList<>();
+    int Quantity = 0;
 
     public double getCost() {
         double price = 0.0;
@@ -17,12 +18,11 @@ public class Bundle implements Product{
 
     public int getQuantity()
     {
-
         int min = items.get(0).getQuantity();
 
         for(int i = 1;  i < items.size() ; i++)
         {
-            if(min < items.get(i).getQuantity())
+            if(min > items.get(i).getQuantity())
             {
                 min = items.get(i).getQuantity();
             }
@@ -74,5 +74,10 @@ public class Bundle implements Product{
     @Override
     public String getName() {
         return "Bundle";
+    }
+
+    @Override
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
     }
 }

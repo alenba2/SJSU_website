@@ -3,6 +3,7 @@ package com.example.sjsuwebsite.controller;
 import com.example.sjsuwebsite.Bundle;
 import com.example.sjsuwebsite.Item;
 import com.example.sjsuwebsite.ItemSystem;
+import com.example.sjsuwebsite.Product;
 import com.example.sjsuwebsite.model.Users;
 import com.example.sjsuwebsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,10 +102,25 @@ public class MainController {
     public String ItemPage(@RequestParam(name = "ItemNumber") int ItemNumber, Model model) {
 
         model.addAttribute("Item", ItemList.get(ItemNumber));
+        model.addAttribute("ItemNumber", ItemNumber);
 
 //        model.addAttribute("num", cart);
 
         return "ItemPage";
+    }
+
+    @PostMapping("/ItemPage")
+    public String ItemPage2( @RequestParam(name="Stock") int Stock,@RequestParam(name="ItemNumber") int ItemNumber) {
+
+        Product prod = ItemList.get(ItemNumber);
+        prod.setQuantity(Stock);
+        //Puts Item Selected to CartList
+        CartList.add(prod);
+
+//        model.addAttribute("num", cart);
+
+//        REDIRECTS TO MAIN PAGE
+        return "redirect:MainPage";
     }
 
     //    CartPage
@@ -173,16 +189,18 @@ public class MainController {
         boolean Existdb = repo.existsUsersByUsernameAndPassword(user.getUsername(), user.getPassword());
 
 
-        if(Existdb)
-        {
-            System.out.println("main");
-            return "redirect";
-        }
-        } else {
-            System.out.println("no user");
-            model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
-            return "Login";
-        }
+//        if(Existdb)
+//        {
+//            System.out.println("main");
+//            return "redirect";
+//        }
+//        } else {
+//            System.out.println("no user");
+//            model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
+//            return "Login";
+//        }
+
+        return "Login";
 
     }
 

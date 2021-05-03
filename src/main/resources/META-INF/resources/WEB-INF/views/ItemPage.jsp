@@ -60,7 +60,7 @@
     <br>
     <br>
     <a>
-        Cost: <a style="color:red">$<f:formatNumber type="number" pattern="0.00" value="${Item.getPrice()}"/></a>
+        Cost: <a style="color:red">$<f:formatNumber type="number" pattern="0.00" value="${Item.getCost()}"/></a>
     </a>
     <br>
     <br>
@@ -72,7 +72,7 @@
 <%-- Inventory Box --%>
 
 <div id="InventoryBox" style="text-align: center">
-    <form:form>
+    <form:form action="/ItemPage" method="post">
         <a>Item Availability:
             <a >
                 <c:choose>
@@ -90,6 +90,8 @@
             </a>
         </a>
         <br>
+<%--        Hidden Value to let the Controller know what ItemNumber this is--%>
+        <input type="hidden" value="${ItemNumber}" name="ItemNumber">
         <br>
         <a>
             <label for="Stock">Stock: </label>

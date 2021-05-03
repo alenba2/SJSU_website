@@ -32,7 +32,7 @@
 
 
 <div class="card-columns container offset" >
-    <form:form action="/" method="post">
+
     <c:forEach var = "i" begin = "0" end = "${Item.length() - 1}">
 
 
@@ -53,7 +53,6 @@
 
 
     </c:forEach>
-    </form:form>
 
 </div>
 
