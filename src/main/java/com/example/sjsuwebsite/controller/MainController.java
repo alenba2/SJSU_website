@@ -178,7 +178,7 @@ public class MainController {
             System.out.println("main");
             return "redirect";
         }
-        } else {
+        else {
             System.out.println("no user");
             model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
             return "Login";
