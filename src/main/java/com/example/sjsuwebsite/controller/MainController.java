@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 
@@ -170,15 +172,29 @@ public class MainController {
 
         boolean Existdb = repo.existsUsersByUsernameAndPassword(user.getUsername(), user.getPassword());
 
-        if (Existdb) {
+
+        if(Existdb)
+        {
             System.out.println("main");
-            return "MainPage";
+            return "redirect";
+        }
         } else {
             System.out.println("no user");
             model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
             return "Login";
         }
 
+    }
+
+//    @RequestMapping(value = "/redirect", method = RequestMethod.GET)
+//    public String redirect() {
+//        return "MainPage";
+//    }
+
+    @RequestMapping(value = "/redirect", method = RequestMethod.POST)
+    public String redirect() {
+        System.out.println("redirect");
+        return "MainPage";
     }
 
 

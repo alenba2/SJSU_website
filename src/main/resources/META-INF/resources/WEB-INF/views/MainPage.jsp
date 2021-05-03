@@ -43,7 +43,9 @@
             <div class="card-body text-center">
                 <p class="card-text">Item Name: ${Item.get(i).getName()} </p>
                 <p class="card-text">Total: $
+
                     <f:formatNumber type="number" pattern="0.00" value="${Item.get(i).getCost()}"/>
+
                 </p>
                 <a href="./ItemPage?ItemNumber=${i}" class="btn btn-primary stretched-link">See Item Details</a>
             </div>

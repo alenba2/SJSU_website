@@ -78,8 +78,10 @@
                     <div class="col-10">
                         <div class="card-body text-end">
 
+
                             <p class="card-text">(<fmt:formatNumber value="${itemInCart.getCost()}" type="currency"/>x) -
                                 <fmt:formatNumber value="${itemInCart.getQuantity()*itemInCart.getCost()}" type="currency"/>
+
                             </p>
 
                         </div>
