@@ -21,7 +21,7 @@
 
 
 <nav  class="navbar navbar-light" id="header">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="./MainPage">
         <img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
     </a>
 

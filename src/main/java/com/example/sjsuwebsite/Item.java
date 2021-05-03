@@ -17,7 +17,7 @@ public class Item implements Product {
         imageLocation = "/images/items/"+name+".png";
     }
 
-    public double getPrice() {
+    public double getCost() {
         return Cost;
     }
 
@@ -43,6 +43,17 @@ public class Item implements Product {
 
     public void setQuantity(int quantity) {
         Quantity = quantity;
+    }
+
+    public Boolean getStock()
+    {
+        if(getQuantity()>0)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public String getDescription() {

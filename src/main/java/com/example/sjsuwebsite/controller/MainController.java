@@ -19,103 +19,140 @@ public class MainController {
     @Autowired
     UserRepository repo;
 
+    //Our ItemList that lists all the items in the store
     ItemSystem ItemList = new ItemSystem();
 
+    //Cart List that lists all the items the user wants to buy
+    ItemSystem CartList = new ItemSystem();
 
-    int[] cart = {0,0,0,0,0,0,0,0,0};
     ArrayList<Item> itemarr = new ArrayList<>(10);
     ArrayList<Item> cartArrList = new ArrayList<>(10);
 
-    public MainController(){
+    public MainController() {
+        itemarr.add(new Item("Strawberry", 10, "I am a strawberry", 5));
+        itemarr.add(new Item("Apple", 11, "Apple description. " +
+                "this is a super long description of an item to test the formatting," +
+                "alignment, etc of description. " +
+                "There are many different types of apples, for example:" +
+                "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8));
+        itemarr.add(new Item("Banana", 12, "I am a banana", 10.00));
 
-        itemarr.add(new Item("Banana",10,"I am a banana", 10.00));
-
-        cartArrList.add(new Item("Banana",10,"Banana description", 10.00));
-        cartArrList.add(new Item("Apple",7,"Apple description. " +
+        cartArrList.add(new Item("Strawberry", 10, "I am a strawberry", 5));
+        cartArrList.add(new Item("Banana", 10, "Banana description", 10.00));
+        cartArrList.add(new Item("Apple", 7, "Apple description. " +
                 "this is a super long description of an item to test the formatting," +
                 "alignment, etc of description. " +
                 "There are many different types of apples, for example:" +
                 "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8));
 
         // Composite Design
-        Item item1 = new Item("Apple",1,"good Apple",10);
-        Item item2 = new Item("Bad Apple", 1, "Bad Apple", 11);
+        Item item1 = new Item("Strawberry", 10, "I am a strawberry", 5);
+        Item item2 = new Item("Banana", 10, "I am a Banana", 10.00);
+        Item item3 = new Item("Apple", 7, "I am an Apple. " +
+                "this is a super long description of an item to test the formatting," +
+                "alignment, etc of description. " +
+                "There are many different types of apples, for example:" +
+                "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8);
+        Item item4 = new Item ("Grape", 6,"Green Grapes that has a sweet taste", 7);
+        Item item5 = new Item ("Orange", 5, "Oranges that are good for your Vitamin C", 4);
 
 //        Bundle Class stores multiple items at once in an ArrayList
         Bundle bundle = new Bundle();
         bundle.addItem(item1);
         bundle.addItem(item2);
+        bundle.addItem(item3);
 
 //        ItemList is able to store Item and Bundle class together
-        ItemList.add(new Item("Banana",10,"Banana description", 10.00));
         ItemList.add(bundle);
-
-//        Prints Items
-        ItemList.printItem();
+        ItemList.add(item1);
+        ItemList.add(item2);
+        ItemList.add(item3);
+        ItemList.add(item4);
+        ItemList.add(item5);
 
     }
 
 
-    public MainController(UserRepository repo)
-    {
+    public MainController(UserRepository repo) {
         this.repo = repo;
-        System.out.println("hit2");
     }
 
-//    MainPage
+    //    MainPage
     @RequestMapping("/MainPage")
     public String MainPage(Model model) {
 
-        model.addAttribute("num", cart);
-        model.addAttribute("Item",itemarr);
+        model.addAttribute("Cart", CartList);
+        model.addAttribute("Item", ItemList);
+
         return "MainPage";
     }
 
     @PostMapping("/MainPage")
-    public String MainPage2(@RequestParam(name = "buttonName") int change, Model model){
+    public String MainPage2(@RequestParam(name = "buttonName") int change, Model model) {
 
-
-        model.addAttribute("num", cart);
-        System.out.println("hit");
+        model.addAttribute("CartList", CartList);
+        model.addAttribute("Item", ItemList);
 
         return "MainPage";
     }
 
-//    ItemPage
+    //    ItemPage
     @RequestMapping("/ItemPage")
-    public String ItemPage(@RequestParam(name= "ItemNumber") int ItemNumber,Model model) {
-        model.addAttribute("Item", itemarr.get(ItemNumber));
-        model.addAttribute("num", cart);
+    public String ItemPage(@RequestParam(name = "ItemNumber") int ItemNumber, Model model) {
+
+        model.addAttribute("Item", ItemList.get(ItemNumber));
+
+//        model.addAttribute("num", cart);
 
         return "ItemPage";
     }
 
-//    CartPage
+    //    CartPage
     @RequestMapping("/Cart")
-    public String Cart(Model model)
-    {
+    public String Cart(Model model) {
+        model.addAttribute("itemarr", itemarr);
         model.addAttribute("cartArrList", cartArrList);
         return "cart";
     }
 
-//    AccountSettings
+    @PostMapping(value = "/Cart", params = {"quantity", "itemName"})
+    public String updateCart(Model model, @RequestParam int quantity, @RequestParam String itemName) {
+
+        Item currentItemInCart = null;
+        Item currentItemInStock =null;
+
+        for (Item item : cartArrList) {
+            if (item.getName().equals(itemName))
+                currentItemInCart = item;
+        }
+        for (Item item : itemarr) {
+            if (item.getName().equals(itemName))
+                currentItemInStock = item;
+        }
+        if (quantity < 0)
+            quantity = 0;
+        if(quantity>currentItemInStock.getQuantity())
+            quantity=currentItemInStock.getQuantity();
+
+        currentItemInCart.setQuantity(quantity);
+        Cart(model);
+        return "cart";
+    }
+
+    //    AccountSettings
     @RequestMapping("/AccountSettings")
-    public String AccountSettings()
-    {
+    public String AccountSettings() {
         return "AccountSettings";
     }
 
 
     @RequestMapping("/PurchaseHistory")
-    public String PurchaseHistory()
-    {
+    public String PurchaseHistory() {
         return "PurchaseHistory";
     }
 
     @RequestMapping("/SignUp")
-    public String SignUp()
-
-    {
+    public String SignUp() {
         return "SignUp";
     }
 
@@ -133,7 +170,7 @@ public class MainController {
         model.addAttribute("users", user);
 
 
-        boolean Existdb = repo.existsUsersByUsernameAndPassword(user.getUsername(),user.getPassword());
+        boolean Existdb = repo.existsUsersByUsernameAndPassword(user.getUsername(), user.getPassword());
 
 
         if(Existdb)
@@ -141,7 +178,7 @@ public class MainController {
             System.out.println("main");
             return "redirect";
         }
-        else {
+        } else {
             System.out.println("no user");
             model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
             return "Login";
@@ -167,13 +204,11 @@ public class MainController {
         System.out.println("3");
         boolean Existdb = repo.existsUsersByUsername(user.getUsername());
         System.out.println("4");
-        if(Existdb)
-        {
+        if (Existdb) {
             System.out.println("exist");
             model.addAttribute("message", "Error: Username exist in the Database");
             return "SignUp";
-        }
-        else{
+        } else {
             System.out.println("new user added");
             repo.save(user);
             return "Login";
