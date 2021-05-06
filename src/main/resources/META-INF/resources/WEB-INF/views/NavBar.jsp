@@ -30,7 +30,7 @@
             Logout
         </a>
 
-        <a class="btn btn-primary" >
+        <a class="btn btn-primary" href="./AccountSettings">
             <img src="/images/cog-8x.png" width="30" height="30" class="d-inline-block align-top" alt="cog">
         </a>
 

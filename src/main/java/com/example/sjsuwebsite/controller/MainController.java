@@ -20,6 +20,8 @@ public class MainController {
     @Autowired
     UserRepository repo;
 
+    Users currentUser;
+
     //Our ItemList that lists all the items in the store
     ItemSystem ItemList = new ItemSystem();
 
@@ -33,6 +35,8 @@ public class MainController {
     ArrayList<Item> cartArrList = new ArrayList<>(10);
 
     public MainController() {
+        currentUser = new Users();
+
         itemarr.add(new Item("Strawberry", 10, "I am a strawberry", 5));
         itemarr.add(new Item("Apple", 11, "Apple description. " +
                 "this is a super long description of an item to test the formatting," +
@@ -86,6 +90,7 @@ public class MainController {
     @RequestMapping("/MainPage")
     public String MainPage(Model model) {
 
+        model.addAttribute("Username", currentUser);
         model.addAttribute("Cart", CartList);
         model.addAttribute("Item", ItemList);
 
@@ -159,9 +164,15 @@ public class MainController {
     //    AccountSettings
     @RequestMapping("/AccountSettings")
     public String AccountSettings() {
+        System.out.println(currentUser);
+
         return "AccountSettings";
     }
 
+    @RequestMapping("/ChangePassword")
+    public String ChangePassword() {
+        return "ChangePasswordPage";
+    }
 
     @RequestMapping("/PurchaseHistory")
     public String PurchaseHistory() {
@@ -176,7 +187,7 @@ public class MainController {
 
     @RequestMapping(value = "/Login")
     public String Login(Model model) {
-        model.addAttribute("users", new Users());
+        model.addAttribute("users", currentUser);
 
         return "Login";
     }
@@ -189,7 +200,7 @@ public class MainController {
 
         boolean Existdb = repo.existsUsersByUsernameAndPassword(user.getUsername(), user.getPassword());
 
-
+        this.currentUser = user;
 
         if(Existdb)
         {
@@ -202,6 +213,40 @@ public class MainController {
             return "Login";
         }
 
+
+    }
+
+    @PostMapping("/ChangePassword")
+    public String changePassword(@ModelAttribute Users user, Model model) {
+
+        model.addAttribute("users", user);
+        System.out.println(user.newPassword);
+        System.out.println("hello");
+        System.out.println(user.password);
+//        System.out.println("Current user: " + currentUser.username);
+
+
+        boolean Existdb = repo.existsUsersByUsernameAndPassword(currentUser.getUsername(), currentUser.getPassword());
+
+        System.out.println(user);
+        System.out.println(" ");
+        System.out.println(currentUser);
+
+        if(Existdb && (user.password.equals(currentUser.password)))
+        {
+            currentUser.setPassword(user.newPassword);
+            repo.save(currentUser);
+            System.out.println("Successfully changed password");
+//            repo.changePassword(user.getUsername(), user.setPassword());
+            return "AccountSettings";
+        }
+        else {
+            System.out.println("no user");
+            model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
+            return "AccountSettings";
+        }
+
+//        return "MainPage";
 
     }
 
