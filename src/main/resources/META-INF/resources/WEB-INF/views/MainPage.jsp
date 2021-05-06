@@ -47,7 +47,6 @@
     </c:when>
 </c:choose>
 
-
 <div class="card-columns container offset" >
 
     <c:forEach var = "i" begin = "0" end = "${Item.length() - 1}">
@@ -77,7 +76,7 @@
 
 <jsp:include page="NavBar.jsp"/>
 
-
+<h1>Welcome "${Username.getUsername()}"</h1>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

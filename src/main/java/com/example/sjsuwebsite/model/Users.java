@@ -9,6 +9,8 @@ public class Users {
     public String id;
     public String username;
     public String password;
+//    public String oldPassword;
+    public String newPassword;
 
     public Users(String username, String password) {
         this.username = username;
@@ -18,7 +20,6 @@ public class Users {
     public Users() {
 
     }
-
 
     public String getUsername() {
         return username;
@@ -32,9 +33,16 @@ public class Users {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) { this.password = password; }
+
+//    public String getOldPassword() { return oldPassword; }
+//
+    public String getNewPassword() { return newPassword; }
+
+//    public void setOldPassword(String oldPassword) {  this.oldPassword = oldPassword; }
+
+    public void setNewPassword(String newPassword) { this.newPassword = newPassword; }
+
 
     @Override
     public String toString(){

@@ -32,42 +32,9 @@
 
 <%--  Settings for the user to choose from  --%>
 <div class="container">
-    <a href="#" data-toggle="modal" data-target="#changePasswordModal" class="list-group-item list-group-item-action">Change password</a>
+    <a href="ChangePassword" class="list-group-item list-group-item-action">Change password</a>
     <a href="#" data-toggle="modal" data-target="#deleteAccountModal" class="list-group-item list-group-item-action">Delete account</a>
     <a href="#" class="list-group-item list-group-item-action">Check history</a>
-</div>
-
-<%--  Modal for change password  --%>
-<div class="modal" id="changePasswordModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Change Password</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="otherBlank">Old password</span>
-                    </div>
-                    <input type="text" class="form-control">
-                </div>
-
-                <div class="input-group" style="padding-top: 10px">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="blank">New password</span>
-                    </div>
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Change Password</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 <%--  Modal for delete account  --%>
