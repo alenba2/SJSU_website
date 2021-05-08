@@ -3,7 +3,7 @@ package com.example.sjsuwebsite;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemSystem implements Product{
+public class ItemSystem implements Product, Cloneable{
     private List<Product> list = new ArrayList<>();
 
     public void printItem()
@@ -38,6 +38,16 @@ public class ItemSystem implements Product{
     @Override
     public int getQuantity() {
         return -1;
+    }
+
+    @Override
+    public double getCost() {
+        return -1;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return null;
     }
 
     public Product get(int Number)

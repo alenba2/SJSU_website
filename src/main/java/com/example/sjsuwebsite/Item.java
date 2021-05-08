@@ -1,25 +1,24 @@
 package com.example.sjsuwebsite;
 
 
-public class Item implements Product {
+public class Item implements Product,Cloneable {
     private String Name;
     private int Quantity;
     private String Description;
     private double Cost;
-    private String imageLocation;
+
 
     public Item(String name, int quantity, String description, double cost) {
         Name = name;
         Quantity = quantity;
         Description = description;
         Cost = cost;
-
-        imageLocation = "/images/items/"+name+".png";
     }
 
     public double getCost() {
         return Cost;
     }
+
 
     public void setCost(double cost) {
         Cost = cost;
@@ -45,6 +44,11 @@ public class Item implements Product {
         Quantity = quantity;
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        return (Item) super.clone();
+    }
+
     public Boolean getStock()
     {
         if(getQuantity()>0)
@@ -62,8 +66,5 @@ public class Item implements Product {
 
     public void setDescription(String description) {
         Description = description;
-    }
-    public String getImageLocation(){
-        return imageLocation;
     }
 }

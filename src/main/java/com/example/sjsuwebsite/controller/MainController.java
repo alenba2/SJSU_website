@@ -33,6 +33,7 @@ public class MainController {
 
     public MainController() {
         currentUser = new Users();
+
         // Composite Design
         Item item1 = new Item("Strawberry", 10, "I am a strawberry", 5);
         Item item2 = new Item("Banana", 10, "I am a Banana", 10.00);
@@ -90,12 +91,21 @@ public class MainController {
 
     @PostMapping("/ItemPage")
     public String ItemPage2( @RequestParam(name="Stock") int Stock,@RequestParam(name="ItemNumber") int ItemNumber) {
+    try
+    {
+//        CLONES CLASS
+        Product prod = (Product) ItemList.get(ItemNumber).clone();
 
-        Product prod = ItemList.get(ItemNumber);
         prod.setQuantity(Stock);
         //Puts Item Selected to CartList
         CartList.add(prod);
         message = true;
+    }
+    catch(CloneNotSupportedException e)
+    {
+        System.out.println("Something went wrong with the cloning");
+    }
+
 //        REDIRECTS TO MAIN PAGE
         return "redirect:MainPage";
     }
@@ -106,6 +116,9 @@ public class MainController {
 
         model.addAttribute("itemarr", ItemList);
         model.addAttribute("cartArrList", CartList);
+
+
+
         return "cart";
     }
 
