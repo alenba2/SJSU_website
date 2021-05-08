@@ -31,28 +31,8 @@ public class MainController {
     //turns on message on MainPage
     boolean message = false;
 
-    ArrayList<Item> itemarr = new ArrayList<>(10);
-    ArrayList<Item> cartArrList = new ArrayList<>(10);
-
     public MainController() {
         currentUser = new Users();
-
-        itemarr.add(new Item("Strawberry", 10, "I am a strawberry", 5));
-        itemarr.add(new Item("Apple", 11, "Apple description. " +
-                "this is a super long description of an item to test the formatting," +
-                "alignment, etc of description. " +
-                "There are many different types of apples, for example:" +
-                "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8));
-        itemarr.add(new Item("Banana", 12, "I am a banana", 10.00));
-
-        cartArrList.add(new Item("Strawberry", 10, "I am a strawberry", 5));
-        cartArrList.add(new Item("Banana", 10, "Banana description", 10.00));
-        cartArrList.add(new Item("Apple", 7, "Apple description. " +
-                "this is a super long description of an item to test the formatting," +
-                "alignment, etc of description. " +
-                "There are many different types of apples, for example:" +
-                "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8));
-
         // Composite Design
         Item item1 = new Item("Strawberry", 10, "I am a strawberry", 5);
         Item item2 = new Item("Banana", 10, "I am a Banana", 10.00);
@@ -89,13 +69,10 @@ public class MainController {
     //    MainPage
     @RequestMapping("/MainPage")
     public String MainPage(Model model) {
-
         model.addAttribute("Username", currentUser);
         model.addAttribute("Cart", CartList);
         model.addAttribute("Item", ItemList);
-
         model.addAttribute("message", message);
-
         message = false;
 
         return "MainPage";
@@ -108,10 +85,6 @@ public class MainController {
         model.addAttribute("Item", ItemList.get(ItemNumber));
         model.addAttribute("ItemNumber", ItemNumber);
 
-//        model.addAttribute("num", cart);
-
-
-
         return "ItemPage";
     }
 
@@ -122,9 +95,7 @@ public class MainController {
         prod.setQuantity(Stock);
         //Puts Item Selected to CartList
         CartList.add(prod);
-
         message = true;
-
 //        REDIRECTS TO MAIN PAGE
         return "redirect:MainPage";
     }
@@ -132,32 +103,33 @@ public class MainController {
     //    CartPage
     @RequestMapping("/Cart")
     public String Cart(Model model) {
-        model.addAttribute("itemarr", itemarr);
-        model.addAttribute("cartArrList", cartArrList);
+
+        model.addAttribute("itemarr", ItemList);
+        model.addAttribute("cartArrList", CartList);
         return "cart";
     }
 
     @PostMapping(value = "/Cart", params = {"quantity", "itemName"})
     public String updateCart(Model model, @RequestParam int quantity, @RequestParam String itemName) {
 
-        Item currentItemInCart = null;
-        Item currentItemInStock =null;
-
-        for (Item item : cartArrList) {
-            if (item.getName().equals(itemName))
-                currentItemInCart = item;
-        }
-        for (Item item : itemarr) {
-            if (item.getName().equals(itemName))
-                currentItemInStock = item;
-        }
-        if (quantity < 0)
-            quantity = 0;
-        if(quantity>currentItemInStock.getQuantity())
-            quantity=currentItemInStock.getQuantity();
-
-        currentItemInCart.setQuantity(quantity);
-        Cart(model);
+//        Item currentItemInCart = null;
+//        Item currentItemInStock =null;
+//
+//        for (Item item : cartArrList) {
+//            if (item.getName().equals(itemName))
+//                currentItemInCart = item;
+//        }
+//        for (Item item : itemarr) {
+//            if (item.getName().equals(itemName))
+//                currentItemInStock = item;
+//        }
+//        if (quantity < 0)
+//            quantity = 0;
+//        if(quantity>currentItemInStock.getQuantity())
+//            quantity=currentItemInStock.getQuantity();
+//
+//        currentItemInCart.setQuantity(quantity);
+//        Cart(model);
         return "cart";
     }
 
@@ -204,8 +176,7 @@ public class MainController {
 
         if(Existdb)
         {
-            System.out.println("main");
-            return "redirect";
+            return "redirect:MainPage";
         }
         else {
             System.out.println("no user");
@@ -248,17 +219,6 @@ public class MainController {
 
 //        return "MainPage";
 
-    }
-
-//    @RequestMapping(value = "/redirect", method = RequestMethod.GET)
-//    public String redirect() {
-//        return "MainPage";
-//    }
-
-    @RequestMapping(value = "/redirect", method = RequestMethod.POST)
-    public String redirect() {
-        System.out.println("redirect");
-        return "MainPage";
     }
 
 
