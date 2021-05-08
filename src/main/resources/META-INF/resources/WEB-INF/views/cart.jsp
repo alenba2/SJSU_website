@@ -66,9 +66,16 @@
                                             <label>Quantity:
                                                 <input type="number" name="quantity" style="width: 50px;" value="${cartArrList.get(i).getQuantity()}">
                                             </label>
+                                            <div style="width: 200px">
+                                                <button type="submit" class="btn btn-primary" name="Submit" > Submit </button>
 
-                                            <input type="submit" value="Submit"/>
-                                            <input type="hidden" id="itemName" name="itemName" value="${itemInCart.getName()}"/>
+                                                <button type="submit" class="btn btn-danger" name="Delete"> Delete </button>
+                                            </div>
+
+
+
+
+                                            <input type="hidden" id="itemNumber" name="itemNumber" value="${i}"/>
                                         </form>
                                     </div>
 

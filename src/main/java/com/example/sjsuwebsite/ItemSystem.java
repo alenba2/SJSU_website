@@ -60,5 +60,10 @@ public class ItemSystem implements Product, Cloneable{
         return list.size();
     }
 
+    public void delete(int number)
+    {
+        list.remove(number);
+    }
+
 
 }

@@ -122,29 +122,29 @@ public class MainController {
         return "cart";
     }
 
-    @PostMapping(value = "/Cart", params = {"quantity", "itemName"})
-    public String updateCart(Model model, @RequestParam int quantity, @RequestParam String itemName) {
+    @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Submit"})
+    public String updateCart(Model model, @RequestParam int quantity, @RequestParam String itemNumber) {
 
-//        Item currentItemInCart = null;
-//        Item currentItemInStock =null;
-//
-//        for (Item item : cartArrList) {
-//            if (item.getName().equals(itemName))
-//                currentItemInCart = item;
-//        }
-//        for (Item item : itemarr) {
-//            if (item.getName().equals(itemName))
-//                currentItemInStock = item;
-//        }
-//        if (quantity < 0)
-//            quantity = 0;
-//        if(quantity>currentItemInStock.getQuantity())
-//            quantity=currentItemInStock.getQuantity();
-//
-//        currentItemInCart.setQuantity(quantity);
-//        Cart(model);
+        CartList.get(Integer.parseInt(itemNumber)).setQuantity(quantity);
+
+        model.addAttribute("itemarr", ItemList);
+        model.addAttribute("cartArrList", CartList);
+
         return "cart";
     }
+
+    @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Delete"})
+    public String deleteCart(Model model, @RequestParam int quantity, @RequestParam String itemNumber) {
+
+        CartList.delete(Integer.parseInt(itemNumber));
+
+        model.addAttribute("itemarr", ItemList);
+        model.addAttribute("cartArrList", CartList);
+
+        return "cart";
+    }
+
+
 
     //    AccountSettings
     @RequestMapping("/AccountSettings")
