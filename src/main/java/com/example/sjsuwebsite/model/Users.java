@@ -1,7 +1,13 @@
 package com.example.sjsuwebsite.model;
 
+import com.example.sjsuwebsite.Item;
+import jdk.jfr.DataAmount;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "users")
 public class Users {
@@ -43,11 +49,10 @@ public class Users {
 
     public void setNewPassword(String newPassword) { this.newPassword = newPassword; }
 
-
     @Override
     public String toString(){
         return "Users = { " +
-                "Username: " + username + "\'" +
+                "Username: " + username + "\t" +
                 "Password: " + password + " }";
     }
 }

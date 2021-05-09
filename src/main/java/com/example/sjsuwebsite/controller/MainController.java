@@ -4,21 +4,24 @@ import com.example.sjsuwebsite.Bundle;
 import com.example.sjsuwebsite.Item;
 import com.example.sjsuwebsite.ItemSystem;
 import com.example.sjsuwebsite.Product;
+import com.example.sjsuwebsite.model.History;
 import com.example.sjsuwebsite.model.Users;
+import com.example.sjsuwebsite.repository.HistoryRepository;
 import com.example.sjsuwebsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 public class MainController {
     @Autowired
-    UserRepository repo;
+    UserRepository userrepo;
+    @Autowired
+    HistoryRepository histrepo;
 
     Users currentUser;
 
@@ -31,27 +34,8 @@ public class MainController {
     //turns on message on MainPage
     boolean message = false;
 
-    ArrayList<Item> itemarr = new ArrayList<>(10);
-    ArrayList<Item> cartArrList = new ArrayList<>(10);
-
     public MainController() {
         currentUser = new Users();
-
-        itemarr.add(new Item("Strawberry", 10, "I am a strawberry", 5));
-        itemarr.add(new Item("Apple", 11, "Apple description. " +
-                "this is a super long description of an item to test the formatting," +
-                "alignment, etc of description. " +
-                "There are many different types of apples, for example:" +
-                "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8));
-        itemarr.add(new Item("Banana", 12, "I am a banana", 10.00));
-
-        cartArrList.add(new Item("Strawberry", 10, "I am a strawberry", 5));
-        cartArrList.add(new Item("Banana", 10, "Banana description", 10.00));
-        cartArrList.add(new Item("Apple", 7, "Apple description. " +
-                "this is a super long description of an item to test the formatting," +
-                "alignment, etc of description. " +
-                "There are many different types of apples, for example:" +
-                "Ambrosia, fuji, honeycrisp, granny smith, pink lady", 8));
 
         // Composite Design
         Item item1 = new Item("Strawberry", 10, "I am a strawberry", 5);
@@ -82,20 +66,17 @@ public class MainController {
     }
 
 
-    public MainController(UserRepository repo) {
-        this.repo = repo;
+    public MainController(UserRepository userrepo) {
+        this.userrepo = userrepo;
     }
 
     //    MainPage
     @RequestMapping("/MainPage")
     public String MainPage(Model model) {
-
         model.addAttribute("Username", currentUser);
         model.addAttribute("Cart", CartList);
         model.addAttribute("Item", ItemList);
-
         model.addAttribute("message", message);
-
         message = false;
 
         return "MainPage";
@@ -108,58 +89,94 @@ public class MainController {
         model.addAttribute("Item", ItemList.get(ItemNumber));
         model.addAttribute("ItemNumber", ItemNumber);
 
-//        model.addAttribute("num", cart);
-
-
-
         return "ItemPage";
     }
 
     @PostMapping("/ItemPage")
     public String ItemPage2( @RequestParam(name="Stock") int Stock,@RequestParam(name="ItemNumber") int ItemNumber) {
+    try
+    {
+//        CLONES CLASS
+        Product prod = (Product) ItemList.get(ItemNumber).clone();
 
-        Product prod = ItemList.get(ItemNumber);
         prod.setQuantity(Stock);
         //Puts Item Selected to CartList
         CartList.add(prod);
-
         message = true;
+    }
+    catch(CloneNotSupportedException e)
+    {
+        System.out.println("Something went wrong with the cloning");
+    }
 
 //        REDIRECTS TO MAIN PAGE
         return "redirect:MainPage";
     }
 
-    //    CartPage
+    //    CartPage on startup
     @RequestMapping("/Cart")
     public String Cart(Model model) {
-        model.addAttribute("itemarr", itemarr);
-        model.addAttribute("cartArrList", cartArrList);
+
+        model.addAttribute("itemarr", ItemList);
+        model.addAttribute("cartArrList", CartList);
+
         return "cart";
     }
 
-    @PostMapping(value = "/Cart", params = {"quantity", "itemName"})
-    public String updateCart(Model model, @RequestParam int quantity, @RequestParam String itemName) {
+//    When User wants to edit one of their items
+    @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Submit"})
+    public String updateCart(Model model, @RequestParam int quantity, @RequestParam String itemNumber) {
 
-        Item currentItemInCart = null;
-        Item currentItemInStock =null;
+        CartList.get(Integer.parseInt(itemNumber)).setQuantity(quantity);
 
-        for (Item item : cartArrList) {
-            if (item.getName().equals(itemName))
-                currentItemInCart = item;
-        }
-        for (Item item : itemarr) {
-            if (item.getName().equals(itemName))
-                currentItemInStock = item;
-        }
-        if (quantity < 0)
-            quantity = 0;
-        if(quantity>currentItemInStock.getQuantity())
-            quantity=currentItemInStock.getQuantity();
+        model.addAttribute("itemarr", ItemList);
+        model.addAttribute("cartArrList", CartList);
 
-        currentItemInCart.setQuantity(quantity);
-        Cart(model);
         return "cart";
     }
+
+//    When User wants to delete one of their items
+    @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Delete"})
+    public String deleteCart(Model model, @RequestParam int quantity, @RequestParam String itemNumber) {
+
+        CartList.delete(Integer.parseInt(itemNumber));
+
+        model.addAttribute("itemarr", ItemList);
+        model.addAttribute("cartArrList", CartList);
+
+        return "cart";
+    }
+
+//    When User wants to Purchase Items
+    @PostMapping(value = "/Cart", params = {"Checkout"})
+    public String checkoutCart(Model model) {
+
+        int NumberofItems = 0;
+        double TotalCost = 0.0;
+
+        for(int i = 0;i < CartList.length();i++)
+        {
+            NumberofItems = NumberofItems + CartList.get(i).getQuantity();
+            TotalCost = TotalCost + CartList.get(i).getCost();
+        }
+
+        System.out.println(currentUser);
+
+        Date date = new Date();
+
+//        Add to History
+        History hist = new History(currentUser.username,TotalCost,NumberofItems,date);
+
+        histrepo.save(hist);
+
+        System.out.println("Saved total to History");
+
+        model.addAttribute("itemarr", ItemList);
+        model.addAttribute("cartArrList", CartList);
+        return "cart";
+    }
+
+
 
     //    AccountSettings
     @RequestMapping("/AccountSettings")
@@ -197,15 +214,13 @@ public class MainController {
 
         model.addAttribute("users", user);
 
-
-        boolean Existdb = repo.existsUsersByUsernameAndPassword(user.getUsername(), user.getPassword());
+        boolean Existdb = userrepo.existsUsersByUsernameAndPassword(user.getUsername(), user.getPassword());
 
         this.currentUser = user;
 
         if(Existdb)
         {
-            System.out.println("main");
-            return "redirect";
+            return "redirect:MainPage";
         }
         else {
             System.out.println("no user");
@@ -224,9 +239,7 @@ public class MainController {
         System.out.println("hello");
         System.out.println(user.password);
 //        System.out.println("Current user: " + currentUser.username);
-
-
-        boolean Existdb = repo.existsUsersByUsernameAndPassword(currentUser.getUsername(), currentUser.getPassword());
+        boolean Existdb = userrepo.existsUsersByUsernameAndPassword(currentUser.getUsername(), currentUser.getPassword());
 
         System.out.println(user);
         System.out.println(" ");
@@ -235,7 +248,7 @@ public class MainController {
         if(Existdb && (user.password.equals(currentUser.password)))
         {
             currentUser.setPassword(user.newPassword);
-            repo.save(currentUser);
+            userrepo.save(currentUser);
             System.out.println("Successfully changed password");
 //            repo.changePassword(user.getUsername(), user.setPassword());
             return "AccountSettings";
@@ -245,28 +258,12 @@ public class MainController {
             model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
             return "AccountSettings";
         }
-
-//        return "MainPage";
-
     }
-
-//    @RequestMapping(value = "/redirect", method = RequestMethod.GET)
-//    public String redirect() {
-//        return "MainPage";
-//    }
-
-    @RequestMapping(value = "/redirect", method = RequestMethod.POST)
-    public String redirect() {
-        System.out.println("redirect");
-        return "MainPage";
-    }
-
-
     @PostMapping("/SignUp")
     public String getSubmit(@ModelAttribute Users user, Model model) {
         model.addAttribute("users", user);
         System.out.println("3");
-        boolean Existdb = repo.existsUsersByUsername(user.getUsername());
+        boolean Existdb = userrepo.existsUsersByUsername(user.getUsername());
         System.out.println("4");
         if (Existdb) {
             System.out.println("exist");
@@ -274,7 +271,7 @@ public class MainController {
             return "SignUp";
         } else {
             System.out.println("new user added");
-            repo.save(user);
+            userrepo.save(user);
             return "Login";
         }
 

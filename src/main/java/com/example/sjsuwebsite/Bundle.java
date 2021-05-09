@@ -2,7 +2,7 @@ package com.example.sjsuwebsite;
 
 import java.util.ArrayList;
 
-public class Bundle implements Product{
+public class Bundle implements Product,Cloneable{
     ArrayList<Item> items = new ArrayList<>();
     int Quantity = 0;
 
@@ -70,4 +70,10 @@ public class Bundle implements Product{
     public void setQuantity(int quantity) {
         Quantity = quantity;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        return (Bundle) super.clone();
+    }
+
 }

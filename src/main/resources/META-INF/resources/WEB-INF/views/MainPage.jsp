@@ -76,7 +76,7 @@
 
 <jsp:include page="NavBar.jsp"/>
 
-<h1>Welcome "${Username.getUsername()}"</h1>
+<%--<h1>Welcome "${Username.getUsername()}"</h1>--%>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
