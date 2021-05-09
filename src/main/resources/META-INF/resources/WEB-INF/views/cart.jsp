@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <html lang="en">
@@ -27,17 +28,57 @@
     .offset {
         margin-top: 100px;
     }
+    .Checkout{
+        float: right;
+        right: 30px;
+        width: 300px;
+        position: fixed;
+
+    }
 </style>
 
 
 <body>
 
-
 <div class="container offset">
-
     <c:choose>
-<%--    Checks if Cart has more than one item   --%>
-        <c:when test="${cartArrList.length() > 0}">
+
+
+        <%--    Checks if Cart has more than one item   --%>
+    <c:when test="${cartArrList.length() > 0}">
+
+        <form action="Cart" method="post">
+        <div class="card Checkout offset">
+            <p class="card-body">
+                Items Cost:
+                <a style="float: right">
+                    $<f:formatNumber type="number" pattern="0.00" value="${cartArrList.getCost()}"/>
+                </a>
+
+                <br>
+                <br>
+                Tax:
+                <a style="float: right">
+                    $<f:formatNumber type="number" pattern="0.00" value="${cartArrList.getCost()-cartArrList.getCost() * .9}"/>
+                </a>
+                <br>
+                <br>
+                Grand Total:
+                <a style="float: right">
+                    $<f:formatNumber type="number" pattern="0.00" value="${cartArrList.getCost()-cartArrList.getCost() * .9 + cartArrList.getCost()}"/>
+                </a>
+                <br>
+                <br>
+
+
+                    <%--       Checkout Button   --%>
+                    <%--        <a class="btn btn-secondary" type="submit" name="checkout" style="color:white">Checkout</a>--%>
+
+                <button type="submit" class="btn btn-secondary" name="Checkout"> Checkout </button>
+
+            </p>
+        </div>
+        </form>
 
             <c:forEach var = "i" begin = "0" end = "${cartArrList.length()-1}">
                 <div class="card my-3">
@@ -107,13 +148,6 @@
             </c:forEach>
 
 
-<%--            Checkout Button   --%>
-            <div class="text-end">
-                <div class="col pt-1">
-                    <button class="btn btn-secondary" type="submit">Checkout</button>
-                </div>
-            </div>
-
 
         </c:when>
 
@@ -125,14 +159,14 @@
         Please Checkout an Item
     </c:otherwise>
 
+
     </c:choose>
 
-
-
-
-
-
 </div>
+
+
+
+
 
 <%-- ------------------- Navbar for the top ------------------  --%>
 

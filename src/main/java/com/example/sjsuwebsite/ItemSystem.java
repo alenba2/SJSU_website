@@ -41,11 +41,6 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     @Override
-    public double getCost() {
-        return -1;
-    }
-
-    @Override
     public Object clone() throws CloneNotSupportedException {
         return null;
     }
@@ -53,6 +48,16 @@ public class ItemSystem implements Product, Cloneable{
     public Product get(int Number)
     {
         return list.get(Number);
+    }
+
+    @Override
+    public double getCost(){
+        double price = 0.00;
+        for(Product item: list)
+        {
+            price = price + item.getCost()*item.getQuantity();
+        }
+        return price;
     }
 
     public int length()

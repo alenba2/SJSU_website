@@ -110,18 +110,17 @@ public class MainController {
         return "redirect:MainPage";
     }
 
-    //    CartPage
+    //    CartPage on startup
     @RequestMapping("/Cart")
     public String Cart(Model model) {
 
         model.addAttribute("itemarr", ItemList);
         model.addAttribute("cartArrList", CartList);
 
-
-
         return "cart";
     }
 
+//    When User wants to edit one of their items
     @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Submit"})
     public String updateCart(Model model, @RequestParam int quantity, @RequestParam String itemNumber) {
 
@@ -133,10 +132,39 @@ public class MainController {
         return "cart";
     }
 
+//    When User wants to delete one of their items
     @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Delete"})
     public String deleteCart(Model model, @RequestParam int quantity, @RequestParam String itemNumber) {
 
         CartList.delete(Integer.parseInt(itemNumber));
+
+        model.addAttribute("itemarr", ItemList);
+        model.addAttribute("cartArrList", CartList);
+
+        return "cart";
+    }
+
+//    When User wants to Purchase Items
+    @PostMapping(value = "/Cart", params = {"Checkout"})
+    public String checkoutCart(Model model) {
+
+        int NumberofItems = 0;
+        double TotalCost = 0.0;
+
+        for(int i = 0;i < CartList.length();i++)
+        {
+            NumberofItems = NumberofItems + CartList.get(i).getQuantity();
+            TotalCost = TotalCost + CartList.get(i).getCost();
+        }
+
+        Item receipt = new Item("",NumberofItems,"",TotalCost);
+
+        System.out.println(currentUser);
+
+//        Add to History
+
+//        ArrayList<Item> a = currentUser.getHistory();
+//        repo.save(currentUser);
 
         model.addAttribute("itemarr", ItemList);
         model.addAttribute("cartArrList", CartList);
@@ -208,8 +236,6 @@ public class MainController {
         System.out.println("hello");
         System.out.println(user.password);
 //        System.out.println("Current user: " + currentUser.username);
-
-
         boolean Existdb = repo.existsUsersByUsernameAndPassword(currentUser.getUsername(), currentUser.getPassword());
 
         System.out.println(user);
@@ -229,12 +255,7 @@ public class MainController {
             model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
             return "AccountSettings";
         }
-
-//        return "MainPage";
-
     }
-
-
     @PostMapping("/SignUp")
     public String getSubmit(@ModelAttribute Users user, Model model) {
         model.addAttribute("users", user);
