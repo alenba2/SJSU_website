@@ -4,21 +4,24 @@ import com.example.sjsuwebsite.Bundle;
 import com.example.sjsuwebsite.Item;
 import com.example.sjsuwebsite.ItemSystem;
 import com.example.sjsuwebsite.Product;
+import com.example.sjsuwebsite.model.History;
 import com.example.sjsuwebsite.model.Users;
+import com.example.sjsuwebsite.repository.HistoryRepository;
 import com.example.sjsuwebsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 public class MainController {
     @Autowired
-    UserRepository repo;
+    UserRepository userrepo;
+    @Autowired
+    HistoryRepository histrepo;
 
     Users currentUser;
 
@@ -63,8 +66,8 @@ public class MainController {
     }
 
 
-    public MainController(UserRepository repo) {
-        this.repo = repo;
+    public MainController(UserRepository userrepo) {
+        this.userrepo = userrepo;
     }
 
     //    MainPage
@@ -157,18 +160,19 @@ public class MainController {
             TotalCost = TotalCost + CartList.get(i).getCost();
         }
 
-        Item receipt = new Item("",NumberofItems,"",TotalCost);
-
         System.out.println(currentUser);
 
-//        Add to History
+        Date date = new Date();
 
-//        ArrayList<Item> a = currentUser.getHistory();
-//        repo.save(currentUser);
+//        Add to History
+        History hist = new History(currentUser.username,TotalCost,NumberofItems,date);
+
+        histrepo.save(hist);
+
+        System.out.println("Saved total to History");
 
         model.addAttribute("itemarr", ItemList);
         model.addAttribute("cartArrList", CartList);
-
         return "cart";
     }
 
@@ -210,8 +214,7 @@ public class MainController {
 
         model.addAttribute("users", user);
 
-
-        boolean Existdb = repo.existsUsersByUsernameAndPassword(user.getUsername(), user.getPassword());
+        boolean Existdb = userrepo.existsUsersByUsernameAndPassword(user.getUsername(), user.getPassword());
 
         this.currentUser = user;
 
@@ -236,7 +239,7 @@ public class MainController {
         System.out.println("hello");
         System.out.println(user.password);
 //        System.out.println("Current user: " + currentUser.username);
-        boolean Existdb = repo.existsUsersByUsernameAndPassword(currentUser.getUsername(), currentUser.getPassword());
+        boolean Existdb = userrepo.existsUsersByUsernameAndPassword(currentUser.getUsername(), currentUser.getPassword());
 
         System.out.println(user);
         System.out.println(" ");
@@ -245,7 +248,7 @@ public class MainController {
         if(Existdb && (user.password.equals(currentUser.password)))
         {
             currentUser.setPassword(user.newPassword);
-            repo.save(currentUser);
+            userrepo.save(currentUser);
             System.out.println("Successfully changed password");
 //            repo.changePassword(user.getUsername(), user.setPassword());
             return "AccountSettings";
@@ -260,7 +263,7 @@ public class MainController {
     public String getSubmit(@ModelAttribute Users user, Model model) {
         model.addAttribute("users", user);
         System.out.println("3");
-        boolean Existdb = repo.existsUsersByUsername(user.getUsername());
+        boolean Existdb = userrepo.existsUsersByUsername(user.getUsername());
         System.out.println("4");
         if (Existdb) {
             System.out.println("exist");
@@ -268,7 +271,7 @@ public class MainController {
             return "SignUp";
         } else {
             System.out.println("new user added");
-            repo.save(user);
+            userrepo.save(user);
             return "Login";
         }
 
