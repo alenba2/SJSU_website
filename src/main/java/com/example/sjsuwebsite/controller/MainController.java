@@ -8,13 +8,19 @@ import com.example.sjsuwebsite.model.History;
 import com.example.sjsuwebsite.model.Users;
 import com.example.sjsuwebsite.repository.HistoryRepository;
 import com.example.sjsuwebsite.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.DBObject;
+import jdk.jfr.MetadataDefinition;
+import org.springframework.asm.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Date;
+import java.util.*;
 
 @Controller
 public class MainController {
@@ -180,8 +186,10 @@ public class MainController {
 
     //    AccountSettings
     @RequestMapping("/AccountSettings")
-    public String AccountSettings() {
+    public String AccountSettings(Model model) {
         System.out.println(currentUser);
+        model.addAttribute("Username", currentUser);
+
 
         return "AccountSettings";
     }
@@ -191,10 +199,10 @@ public class MainController {
         return "ChangePasswordPage";
     }
 
-    @RequestMapping("/PurchaseHistory")
-    public String PurchaseHistory() {
-        return "PurchaseHistory";
-    }
+//    @RequestMapping("/PurchaseHistory")
+//    public String PurchaseHistory() {
+//        return "PurchaseHistory";
+//    }
 
     @RequestMapping("/SignUp")
     public String SignUp() {
@@ -229,6 +237,19 @@ public class MainController {
         }
 
 
+    }
+
+    private ObjectMapper mapper = new ObjectMapper();
+
+    @RequestMapping("/PurchaseHistory")
+    public String getPurchaseHistory(@ModelAttribute History userHistory, Model model) throws JsonProcessingException {
+        List<Object> userPurchaseHistory = Collections.singletonList(histrepo.findByUsername(currentUser.getUsername()));
+        Object formattedPurchaseHistory = mapper.writeValueAsString(((List) userPurchaseHistory.get(0)));
+
+        System.out.println(formattedPurchaseHistory);
+        System.out.println("Size of history: " + userPurchaseHistory.size());
+
+        return "PurchaseHistory";
     }
 
     @PostMapping("/ChangePassword")

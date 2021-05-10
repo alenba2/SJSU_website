@@ -1,6 +1,7 @@
 <!doctype html>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -28,13 +29,13 @@
 
 <body>
 
-<h1 id="heading">Welcome, user!</h1>
+<h1 id="heading">Hello, ${Username.getUsername()}</h1>
 
 <%--  Settings for the user to choose from  --%>
 <div class="container">
     <a href="ChangePassword" class="list-group-item list-group-item-action">Change password</a>
     <a href="#" data-toggle="modal" data-target="#deleteAccountModal" class="list-group-item list-group-item-action">Delete account</a>
-    <a href="#" class="list-group-item list-group-item-action">Check history</a>
+    <a href="./PurchaseHistory" class="list-group-item list-group-item-action">Check history</a>
 </div>
 
 <%--  Modal for delete account  --%>

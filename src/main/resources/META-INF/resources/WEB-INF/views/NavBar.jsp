@@ -21,8 +21,9 @@
 
 
 <nav  class="navbar navbar-light" id="header">
-    <a class="navbar-brand" href="./MainPage">
+    <a class="navbar-brand" href="./MainPage" style="color: white">
         <img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
+        Welcome, ${Username.getUsername()}
     </a>
 
     <form class="form-inline" >

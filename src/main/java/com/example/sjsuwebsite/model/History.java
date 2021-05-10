@@ -3,6 +3,7 @@ package com.example.sjsuwebsite.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Arrays;
 import java.util.Date;
 
 @Document(collection = "history")
@@ -22,6 +23,10 @@ public class History {
         this.date = date;
     }
 
+    public History() {
+
+    }
+
     public Double getTotal() {
         return total;
     }
@@ -38,7 +43,15 @@ public class History {
         this.quantity = quantity;
     }
 
-    public String toString(){
-        return "History for " + username;
-    }
+//    @Override
+//    public String toString(){
+//        String[] history;
+////        return "History = { " +
+////                "Username: " + username + "\t" +
+////                "| Price: " + total + "\t" +
+////                "| Quantity: " + quantity + "\t" +
+////                "| Date: " + date + " }";
+////        return "Customer [name: " + username + ", price: " + total + "]";
+//
+//    }
 }
