@@ -176,8 +176,8 @@ public class MainController {
 
         histrepo.save(hist);
 
-        model.addAttribute("itemarr", ItemList);
-        model.addAttribute("cartArrList", CartList);
+        CartList.clear();
+
         return "redirect:ConfirmCheckout";
     }
 
