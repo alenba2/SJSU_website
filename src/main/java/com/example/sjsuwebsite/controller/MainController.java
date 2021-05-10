@@ -171,8 +171,6 @@ public class MainController {
 
         histrepo.save(hist);
 
-        System.out.println("Saved total to History");
-
         model.addAttribute("itemarr", ItemList);
         model.addAttribute("cartArrList", CartList);
         return "cart";
