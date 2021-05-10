@@ -8,11 +8,13 @@ public class Bundle implements Product,Cloneable{
 
     public double getCost() {
         double price = 0.0;
+
         for(Item item: items)
         {
             price = price + item.getCost();
         }
         price = price - (price*0.1);
+
         return price;
     }
 

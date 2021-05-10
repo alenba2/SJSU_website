@@ -159,15 +159,13 @@ public class MainController {
         {
             NumberofItems = NumberofItems + CartList.get(i).getQuantity();
 
-            TotalCost = TotalCost + CartList.get(i).getCost()*NumberofItems;
-
         }
+
+        TotalCost = CartList.getCost();
 
         double tax = TotalCost - TotalCost*.9;
 
         TotalCost = TotalCost + tax;
-
-        System.out.println(currentUser);
 
         Date date = new Date();
 
