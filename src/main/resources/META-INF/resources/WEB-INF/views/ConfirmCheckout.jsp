@@ -46,7 +46,7 @@
 
         <br>
 
-        Date of Purchase: ${history.getDate().toString()}
+        Date of Purchase: ${history.getDate()}
 
         <br><br>
 

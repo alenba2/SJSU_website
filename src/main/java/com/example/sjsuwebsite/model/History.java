@@ -41,4 +41,8 @@ public class History {
     public String toString(){
         return "History for " + username;
     }
+
+    public Date getDate() {
+        return date;
+    }
 }
