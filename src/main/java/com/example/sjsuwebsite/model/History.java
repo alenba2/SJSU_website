@@ -3,6 +3,7 @@ package com.example.sjsuwebsite.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Arrays;
 import java.util.Date;
 
 @Document(collection = "history")
@@ -20,6 +21,10 @@ public class History {
         this.total = total;
         this.quantity = quantity;
         this.date = date;
+    }
+
+    public History() {
+
     }
 
     public Double getTotal() {
