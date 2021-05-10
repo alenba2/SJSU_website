@@ -34,10 +34,6 @@ public class History {
         return quantity;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }

@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
@@ -153,20 +152,17 @@ public class MainController {
     public String checkoutCart(Model model) {
 
         int NumberofItems = 0;
-        double TotalCost = 0.00;
+        double TotalCost = 0.0;
 
         for(int i = 0;i < CartList.length();i++)
         {
             NumberofItems = NumberofItems + CartList.get(i).getQuantity();
 
             TotalCost = TotalCost + CartList.get(i).getCost()*NumberofItems;
+
         }
 
-        double tax = TotalCost - TotalCost * .9;
-
-        TotalCost = TotalCost + tax;
-
-
+        System.out.println(currentUser);
 
         Date date = new Date();
 
@@ -175,40 +171,14 @@ public class MainController {
 
         histrepo.save(hist);
 
-//        Clear Cart
-        CartList.clear();
+        System.out.println("Saved total to History");
 
-        return "redirect:ConfirmCheckout";
+        model.addAttribute("itemarr", ItemList);
+        model.addAttribute("cartArrList", CartList);
+        return "cart";
     }
 
-    @RequestMapping("/ConfirmCheckout")
-    public String ConfirmCheckout(Model model){
 
-       ArrayList<History> hist =  histrepo.findAllByUsername(currentUser.username);
-
-       History target = hist.get(hist.size()-1);
-
-       model.addAttribute("history", target);
-
-        return "ConfirmCheckout";
-    }
-
-//    User Logs out
-    @PostMapping(value = "/ConfirmCheckout", params ="Logout" )
-    public String Logout(Model model){
-
-//        Reset Values
-        currentUser = new Users();
-
-        return "redirect:Login";
-    }
-
-//    User continues to shop
-    @PostMapping(value="/ConfirmCheckout", params = "Continue")
-    public String ContinueShopping(Model model){
-
-        return "redirect:MainPage";
-    }
 
     //    AccountSettings
     @RequestMapping("/AccountSettings")
@@ -259,6 +229,8 @@ public class MainController {
             model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
             return "Login";
         }
+
+
     }
 
     @PostMapping("/ChangePassword")
@@ -289,7 +261,6 @@ public class MainController {
             return "AccountSettings";
         }
     }
-
     @PostMapping("/SignUp")
     public String getSubmit(@ModelAttribute Users user, Model model) {
         model.addAttribute("users", user);

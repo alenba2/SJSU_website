@@ -70,11 +70,5 @@ public class ItemSystem implements Product, Cloneable{
         list.remove(number);
     }
 
-    public void clear()
-    {
-        list.clear();
-    }
-
-
 
 }
