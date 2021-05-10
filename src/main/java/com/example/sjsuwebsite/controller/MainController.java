@@ -157,7 +157,9 @@ public class MainController {
         for(int i = 0;i < CartList.length();i++)
         {
             NumberofItems = NumberofItems + CartList.get(i).getQuantity();
-            TotalCost = TotalCost + CartList.get(i).getCost();
+
+            TotalCost = TotalCost + CartList.get(i).getCost()*NumberofItems;
+
         }
 
         System.out.println(currentUser);
