@@ -34,7 +34,7 @@
             <img src="/images/cog-8x.png" width="30" height="30" class="d-inline-block align-top" alt="cog">
         </a>
 
-        <a href = './Cart' >
+        <a class="btn btn-primary" href = './Cart' >
             <img src="/images/cart-8x.png" width="30" height="30" class="d-inline-block align-top" alt="cart">
         </a>
     </form>

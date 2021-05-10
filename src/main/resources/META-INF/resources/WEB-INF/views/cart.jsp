@@ -74,7 +74,7 @@
                     <%--       Checkout Button   --%>
                     <%--        <a class="btn btn-secondary" type="submit" name="checkout" style="color:white">Checkout</a>--%>
 
-                <button type="submit" class="btn btn-secondary" name="Checkout"> Checkout </button>
+                <button type="submit" class="btn btn-warning" name="Checkout"> Checkout </button>
 
             </p>
         </div>

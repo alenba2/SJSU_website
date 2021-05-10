@@ -29,6 +29,7 @@
     .offset{
         margin-top: 100px;
         width: 1000px;
+
     }
 </style>
 
