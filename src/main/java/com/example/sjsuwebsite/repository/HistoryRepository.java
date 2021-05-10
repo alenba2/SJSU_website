@@ -2,9 +2,8 @@ package com.example.sjsuwebsite.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import com.example.sjsuwebsite.model.History;
-
-import java.util.List;
+import java.util.ArrayList;
 
 public interface HistoryRepository extends MongoRepository<History, String> {
-    List<History> findByUsername(String username);
+    public ArrayList<History> findAllByUsername(String name);
 }

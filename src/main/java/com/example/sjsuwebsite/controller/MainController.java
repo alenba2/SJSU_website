@@ -20,7 +20,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 public class MainController {
@@ -163,10 +164,14 @@ public class MainController {
         for(int i = 0;i < CartList.length();i++)
         {
             NumberofItems = NumberofItems + CartList.get(i).getQuantity();
-            TotalCost = TotalCost + CartList.get(i).getCost();
+
         }
 
-        System.out.println(currentUser);
+        TotalCost = CartList.getCost();
+
+        double tax = TotalCost - TotalCost*.9;
+
+        TotalCost = TotalCost + tax;
 
         Date date = new Date();
 
@@ -175,13 +180,39 @@ public class MainController {
 
         histrepo.save(hist);
 
-        System.out.println("Saved total to History");
+        CartList.clear();
 
-        model.addAttribute("itemarr", ItemList);
-        model.addAttribute("cartArrList", CartList);
-        return "cart";
+        return "redirect:ConfirmCheckout";
     }
 
+    @RequestMapping("/ConfirmCheckout")
+    public String ConfirmCheckout(Model model){
+
+        ArrayList<History> hist =  histrepo.findAllByUsername(currentUser.username);
+
+        History target = hist.get(hist.size()-1);
+
+        model.addAttribute("history", target);
+
+        return "ConfirmCheckout";
+    }
+
+    //    User Logs out
+    @PostMapping(value = "/ConfirmCheckout", params ="Logout" )
+    public String Logout(Model model){
+
+//        Reset Values
+        currentUser = new Users();
+
+        return "redirect:Login";
+    }
+
+    //    User continues to shop
+    @PostMapping(value="/ConfirmCheckout", params = "Continue")
+    public String ContinueShopping(Model model){
+
+        return "redirect:MainPage";
+    }
 
 
     //    AccountSettings

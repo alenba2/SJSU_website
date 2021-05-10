@@ -43,15 +43,11 @@ public class History {
         this.quantity = quantity;
     }
 
-//    @Override
-//    public String toString(){
-//        String[] history;
-////        return "History = { " +
-////                "Username: " + username + "\t" +
-////                "| Price: " + total + "\t" +
-////                "| Quantity: " + quantity + "\t" +
-////                "| Date: " + date + " }";
-////        return "Customer [name: " + username + ", price: " + total + "]";
-//
-//    }
+    public String toString(){
+        return "History for " + username;
+    }
+
+    public Date getDate() {
+        return date;
+    }
 }
