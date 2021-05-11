@@ -160,7 +160,6 @@ public class MainController {
         for(int i = 0;i < CartList.length();i++)
         {
             NumberofItems = NumberofItems + CartList.get(i).getQuantity();
-
         }
 
         TotalCost = CartList.getCost();
@@ -175,6 +174,21 @@ public class MainController {
         History hist = new History(currentUser.username,TotalCost,NumberofItems,date);
 
         histrepo.save(hist);
+
+//        Reduce amount of Stock in ItemList based on CartList
+
+        for(int i = 0; i < CartList.length(); i++)
+        {
+            for(int j = 0; j < ItemList.length(); j++)
+            {
+                if(CartList.get(i).getName().equals(ItemList.get(j).getName()))
+                {
+                    ItemList.get(j).setQuantity(ItemList.get(j).getQuantity()-CartList.get(i).getQuantity());
+                    System.out.println("found target");
+                    break;
+                }
+            }
+        }
 
         CartList.clear();
 
