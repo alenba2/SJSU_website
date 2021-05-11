@@ -13,6 +13,7 @@ public class Bundle implements Product,Cloneable{
         {
             price = price + item.getCost();
         }
+
         price = price - (price*0.1);
 
         return price;

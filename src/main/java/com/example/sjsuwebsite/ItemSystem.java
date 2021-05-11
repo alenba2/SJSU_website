@@ -52,11 +52,16 @@ public class ItemSystem implements Product, Cloneable{
 
     @Override
     public double getCost(){
+
+//        Gets the total number based on the number of quantity
+
         double price = 0.00;
+
         for(Product item: list)
         {
             price = price + item.getCost()*item.getQuantity();
         }
+
         return price;
     }
 
