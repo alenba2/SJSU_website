@@ -40,7 +40,21 @@
 
 <body>
 
+
+
 <div class="container offset">
+
+    <c:choose>
+        <c:when test="${message}">
+            <div class="alert alert-danger alert-dismissible fade show alertmessage" role="alert">
+                <strong>${messageString}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </c:when>
+    </c:choose>
+
     <c:choose>
 
 

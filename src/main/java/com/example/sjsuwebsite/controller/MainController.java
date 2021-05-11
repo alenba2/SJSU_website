@@ -128,9 +128,22 @@ public class MainController {
 
 //    When User wants to edit one of their items
     @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Submit"})
-    public String updateCart(Model model, @RequestParam int quantity, @RequestParam String itemNumber) {
+    public String updateCart(Model model, @RequestParam int quantity, @RequestParam int itemNumber) {
 
-        CartList.get(Integer.parseInt(itemNumber)).setQuantity(quantity);
+//        Error case where User enters a negative number
+        if(quantity <= -1)
+        {
+            model.addAttribute("message", true);
+            model.addAttribute("messageString", "You cannot set negative numbers as your quantity");
+
+            model.addAttribute("itemarr", ItemList);
+            model.addAttribute("cartArrList", CartList);
+
+            return "cart";
+        }
+
+
+        CartList.get(itemNumber).setQuantity(quantity);
 
         model.addAttribute("itemarr", ItemList);
         model.addAttribute("cartArrList", CartList);
@@ -153,6 +166,22 @@ public class MainController {
 //    When User wants to Purchase Items
     @PostMapping(value = "/Cart", params = {"Checkout"})
     public String checkoutCart(Model model) {
+
+//        Error case where Item quantity is 0
+        for(int i = 0; i < CartList.length(); i++)
+        {
+            if(CartList.get(i).getQuantity() == 0)
+            {
+
+                model.addAttribute("message", true);
+                model.addAttribute("messageString", "Item '"+CartList.get(i).getName() +"' quantity is set to 0");
+
+                model.addAttribute("itemarr", ItemList);
+                model.addAttribute("cartArrList", CartList);
+
+                return "cart";
+            }
+        }
 
         int NumberofItems = 0;
         double TotalCost = 0.0;
