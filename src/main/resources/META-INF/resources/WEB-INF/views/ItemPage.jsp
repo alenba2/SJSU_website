@@ -41,12 +41,28 @@
         padding: 20px;
         border-radius: 25px;
         background-color: #e9ecef;
+    }
 
-
+    .alertmessage{
+        margin-top: 100px;
+        left: 500px;
+        width: 1000px;
     }
 </style>
 
 <body>
+
+<c:choose>
+    <c:when test="${message}">
+        <div class="alert alert-danger alert-dismissible fade show alertmessage" role="alert">
+            <strong>You cannot checkout item set to 0 quantity</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:when>
+</c:choose>
+
 
 <%-- --------- Display item --------------------   -----------------      --%>
 

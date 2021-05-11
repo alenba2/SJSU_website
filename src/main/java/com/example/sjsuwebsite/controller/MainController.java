@@ -96,9 +96,23 @@ public class MainController {
     }
 
     @PostMapping("/ItemPage")
-    public String ItemPage2( @RequestParam(name="Stock") int Stock,@RequestParam(name="ItemNumber") int ItemNumber) {
+    public String ItemPage2( @RequestParam(name="Stock") int Stock,@RequestParam(name="ItemNumber") int ItemNumber, Model model) {
+
+//        Error case where user puts 0 as there quantity
+        if(Stock == 0)
+        {
+            model.addAttribute("message", true);
+
+            model.addAttribute("Item", ItemList.get(ItemNumber));
+            model.addAttribute("ItemNumber", ItemNumber);
+
+            return "ItemPage";
+        }
+
     try
     {
+
+
 //        CLONES CLASS
         Product prod = (Product) ItemList.get(ItemNumber).clone();
 
