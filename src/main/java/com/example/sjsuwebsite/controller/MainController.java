@@ -8,18 +8,14 @@ import com.example.sjsuwebsite.model.History;
 import com.example.sjsuwebsite.model.Users;
 import com.example.sjsuwebsite.repository.HistoryRepository;
 import com.example.sjsuwebsite.repository.UserRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongodb.DBObject;
-import jdk.jfr.MetadataDefinition;
-import org.springframework.asm.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -273,12 +269,31 @@ public class MainController {
     private ObjectMapper mapper = new ObjectMapper();
 
     @RequestMapping("/PurchaseHistory")
-    public String getPurchaseHistory(@ModelAttribute History userHistory, Model model) throws JsonProcessingException {
-        List<Object> userPurchaseHistory = Collections.singletonList(histrepo.findByUsername(currentUser.getUsername()));
-        Object formattedPurchaseHistory = mapper.writeValueAsString(((List) userPurchaseHistory.get(0)));
+    public String getPurchaseHistory(@ModelAttribute History userHistory, Model model) throws IOException {
+        ArrayList<History> userPurchaseHistory = histrepo.findAllByUsername(currentUser.getUsername());
+        ArrayList<String> formattedPurchaseHistory = new ArrayList<>();
 
-        System.out.println(formattedPurchaseHistory);
-        System.out.println("Size of history: " + userPurchaseHistory.size());
+        model.addAttribute("History", userPurchaseHistory);
+        model.addAttribute("Username", currentUser);
+
+        double purchasePrice = userPurchaseHistory.get(0).getTotal();
+//        System.out.println("Purchase price: " + purchasePrice);
+
+        for (int i = 0; i < userPurchaseHistory.size(); i++) {
+            String formattedPurchase = mapper.writeValueAsString(userPurchaseHistory.get(i));
+            formattedPurchaseHistory.add(formattedPurchase);
+        }
+
+        for (int i = 0; i < formattedPurchaseHistory.size(); i++) {
+            System.out.println(formattedPurchaseHistory.get(i));
+            Object currentItem = formattedPurchaseHistory.get(i);
+            for (int j = 0; j < 4; j++) {
+                
+            }
+        }
+
+//        System.out.println(formattedPurchaseHistory);
+        System.out.println("Size of purchase history: " + userPurchaseHistory.size());
 
         return "PurchaseHistory";
     }
