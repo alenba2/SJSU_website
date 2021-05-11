@@ -36,25 +36,28 @@
 <h1 id="heading">Purchase History</h1>
 
 <div class="container">
+    <c:forEach var = "i" begin = "0" end = "${History.size() - 1}">
     <a href="#" class="list-group-item list-group-item-action">
-        Purchase date: March 29, 2021
-        <span style="float:right; color:green;">&nbsp;$36.89</span>
-        <span style="float:right;">Total: </span>
+        Purchase date: ${History.get(i).getDate()}
+        <span style="float:right; color:green;"> ${History.get(i).getTotal()}</span>
+        <span style="float:right;">Total: $</span>
     </a>
-    <a href="#" class="list-group-item list-group-item-action">
-        Purchase date: February 21, 2021
-        <span style="float:right; color:green;">&nbsp;$19.51</span>
-        <span style="float:right;">Total: </span>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-        Purchase date: January 6, 2021
-        <span style="float:right; color:green;">&nbsp; $25.63</span>
-        <span style="float:right;">Total: </span>
-    </a>
+<%--    <a href="#" class="list-group-item list-group-item-action">--%>
+<%--        Purchase date: February 21, 2021--%>
+<%--        <span style="float:right; color:green;">&nbsp;$19.51</span>--%>
+<%--        <span style="float:right;">Total: </span>--%>
+<%--    </a>--%>
+<%--    <a href="#" class="list-group-item list-group-item-action">--%>
+<%--        Purchase date: January 6, 2021--%>
+<%--        <span style="float:right; color:green;">&nbsp; $25.63</span>--%>
+<%--        <span style="float:right;">Total: </span>--%>
+<%--    </a>--%>
+    </c:forEach>
 </div>
 
 <div id="back-btn" class="text-center">
-    <button type="button" class="btn btn-primary">Go back</button>
+<%--    <button type="button" class="btn btn-primary">Go back</button>--%>
+    <a class="btn btn-primary" href="./AccountSettings">Go back</a>
 </div>
 
 

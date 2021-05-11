@@ -43,9 +43,9 @@ public class History {
         this.quantity = quantity;
     }
 
-    public String toString(){
-        return "History for " + username;
-    }
+//    public String toString(){
+//        return "History for " + username;
+//    }
 
     public Date getDate() {
         return date;
