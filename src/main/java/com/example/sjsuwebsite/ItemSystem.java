@@ -16,7 +16,24 @@ public class ItemSystem implements Product, Cloneable{
 
     public void add(Product prod)
     {
-        list.add(prod);
+        int counter = -1;
+
+        for(int i = 0; i < list.size(); i++)
+        {
+            if(prod.getName().equals(list.get(i).getName()))
+            {
+                counter = i;
+                break;
+            }
+        }
+
+        if(counter >= 0)
+        {
+            list.get(counter).setQuantity(prod.getQuantity());
+        }
+        else{
+            list.add(prod);
+        }
     }
 
     public String getName()
