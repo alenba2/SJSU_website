@@ -21,8 +21,6 @@
 <style>
     .offset{
         margin-top: 100px;
-
-
     }
 
 </style>
