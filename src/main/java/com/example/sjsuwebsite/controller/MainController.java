@@ -274,7 +274,6 @@ public class MainController {
         return "redirect:MainPage";
     }
 
-
     //    AccountSettings
     @RequestMapping("/AccountSettings")
     public String AccountSettings(Model model) {
