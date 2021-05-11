@@ -56,6 +56,7 @@ public class MainController {
         bundle.addItem(item1);
         bundle.addItem(item2);
         bundle.addItem(item3);
+
         bundle.setQuantity(7);
 
 //        ItemList is able to store Item and Bundle class together
@@ -65,6 +66,11 @@ public class MainController {
         ItemList.add(item3);
         ItemList.add(item4);
         ItemList.add(item5);
+
+        for(int i = 0; i < ItemList.length();i++)
+        {
+            System.out.println("Item number: "+ i +" "+ItemList.get(i).getQuantity());
+        }
 
     }
 
@@ -119,6 +125,7 @@ public class MainController {
         prod.setQuantity(Stock);
         //Puts Item Selected to CartList
         CartList.add(prod);
+
         message = true;
     }
     catch(CloneNotSupportedException e)

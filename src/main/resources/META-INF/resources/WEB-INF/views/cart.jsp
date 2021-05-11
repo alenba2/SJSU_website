@@ -112,7 +112,21 @@
                                     <div class="col ">
                                         <form id="updateCart" action="Cart" method="post">
 
-                                            <div style="width: 100px">Stock: ${itemarr.get(i).getQuantity()}
+                                            <div style="width: 100px">Stock:
+
+                                                    <c:forEach var = "j" begin = "0" end="${itemarr.length()-1}">
+
+                                                        <c:if test="${itemarr.get(j).getName().equals(cartArrList.get(i).getName())}">
+
+                                                            ${itemarr.get(j).getQuantity()}
+
+                                                        </c:if>
+
+                                                    </c:forEach>
+
+
+
+
                                             </div>
 
                                             <div style="width: 100px">Current: ${cartArrList.get(i).getQuantity()}
