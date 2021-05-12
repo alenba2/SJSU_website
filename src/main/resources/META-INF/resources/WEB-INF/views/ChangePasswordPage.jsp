@@ -59,7 +59,9 @@
                     <input type="password" name="newPassword" class="form-control input_pass" value="" placeholder="New Password" required>
                 </div>
                 <div class="d-grid gap-2 ">
-                    <button type="submit"  class="btn btn-warning rounded-pill" >Change Password</button>
+<%--                    <button type="submit"  class="btn btn-warning rounded-pill" onclick="href='./Login'">Change Password</button>--%>
+<%--                    <a class="btn btn-primary" href="./Login" type="submit">Change Password</a>--%>
+                    <input type="submit" class="btn btn-warning rounded pill" onclick="href='/Login.jsp'" value="Change Password">
                 </div>
             </form:form>
 

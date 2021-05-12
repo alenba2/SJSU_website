@@ -74,7 +74,6 @@ public class MainController {
 
     }
 
-
     public MainController(UserRepository userrepo) {
         this.userrepo = userrepo;
     }
@@ -97,6 +96,8 @@ public class MainController {
 
         model.addAttribute("Item", ItemList.get(ItemNumber));
         model.addAttribute("ItemNumber", ItemNumber);
+        model.addAttribute("Username", currentUser);
+
 
         return "ItemPage";
     }
@@ -108,7 +109,7 @@ public class MainController {
         if(Stock == 0)
         {
             model.addAttribute("message", true);
-
+            model.addAttribute("Username", currentUser);
             model.addAttribute("Item", ItemList.get(ItemNumber));
             model.addAttribute("ItemNumber", ItemNumber);
 
@@ -143,6 +144,7 @@ public class MainController {
 
         model.addAttribute("itemarr", ItemList);
         model.addAttribute("cartArrList", CartList);
+        model.addAttribute("Username", currentUser);
 
         return "cart";
     }
@@ -156,7 +158,7 @@ public class MainController {
         {
             model.addAttribute("message", true);
             model.addAttribute("messageString", "You cannot set negative numbers as your quantity");
-
+            model.addAttribute("Username", currentUser);
             model.addAttribute("itemarr", ItemList);
             model.addAttribute("cartArrList", CartList);
 
@@ -168,6 +170,7 @@ public class MainController {
 
         model.addAttribute("itemarr", ItemList);
         model.addAttribute("cartArrList", CartList);
+        model.addAttribute("Username", currentUser);
 
         return "cart";
     }
@@ -180,6 +183,7 @@ public class MainController {
 
         model.addAttribute("itemarr", ItemList);
         model.addAttribute("cartArrList", CartList);
+        model.addAttribute("Username", currentUser);
 
         return "cart";
     }
@@ -196,7 +200,7 @@ public class MainController {
 
                 model.addAttribute("message", true);
                 model.addAttribute("messageString", "Item '"+CartList.get(i).getName() +"' quantity is set to 0");
-
+                model.addAttribute("Username", currentUser);
                 model.addAttribute("itemarr", ItemList);
                 model.addAttribute("cartArrList", CartList);
 
@@ -253,6 +257,7 @@ public class MainController {
         History target = hist.get(hist.size()-1);
 
         model.addAttribute("history", target);
+        model.addAttribute("Username", currentUser);
 
         return "ConfirmCheckout";
     }
@@ -381,7 +386,7 @@ public class MainController {
             userrepo.save(currentUser);
             System.out.println("Successfully changed password");
 //            repo.changePassword(user.getUsername(), user.setPassword());
-            return "AccountSettings";
+            return "Login";
         }
         else {
             System.out.println("no user");
