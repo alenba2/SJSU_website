@@ -338,15 +338,17 @@ public class MainController {
 
     @RequestMapping("/PurchaseHistory")
     public String getPurchaseHistory(@ModelAttribute History userHistory, Model model) throws IOException {
+
         ArrayList<History> userPurchaseHistory = histrepo.findAllByUsername(currentUser.getUsername());
         ArrayList<String> formattedPurchaseHistory = new ArrayList<>();
 
         model.addAttribute("History", userPurchaseHistory);
         model.addAttribute("Username", currentUser);
 
-        double purchasePrice = userPurchaseHistory.get(0).getTotal();
+//        FOUND ERROR HERE
+//        double purchasePrice = userPurchaseHistory.get(0).getTotal();
 //        System.out.println("Purchase price: " + purchasePrice);
-
+//
         for (int i = 0; i < userPurchaseHistory.size(); i++) {
             String formattedPurchase = mapper.writeValueAsString(userPurchaseHistory.get(i));
             formattedPurchaseHistory.add(formattedPurchase);
@@ -356,7 +358,7 @@ public class MainController {
             System.out.println(formattedPurchaseHistory.get(i));
             Object currentItem = formattedPurchaseHistory.get(i);
             for (int j = 0; j < 4; j++) {
-                
+
             }
         }
 
