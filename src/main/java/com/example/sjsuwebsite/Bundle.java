@@ -2,10 +2,16 @@ package com.example.sjsuwebsite;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Bundle implements Product,Cloneable{
     ArrayList<Item> items = new ArrayList<>();
     int Quantity = 0;
 
+    /**
+     * @return
+     */
     public double getCost() {
         double price = 0.0;
 
@@ -19,11 +25,17 @@ public class Bundle implements Product,Cloneable{
         return price;
     }
 
+    /**
+     * @return
+     */
     public int getQuantity()
     {
         return Quantity;
     }
 
+    /**
+     * @return
+     */
     public Boolean getStock()
     {
         if(getQuantity()>0)
@@ -36,11 +48,17 @@ public class Bundle implements Product,Cloneable{
     }
 
 
+    /**
+     * @param item
+     */
     public void addItem(Item item)
     {
         items.add(item);
     }
 
+    /**
+     * @return
+     */
     public String getDescription() {
         String Description = "Special Bundle that includes: <br/>";
 
@@ -52,6 +70,9 @@ public class Bundle implements Product,Cloneable{
         return Description;
     }
 
+    /**
+     *
+     */
     @Override
     public void printItem() {
 
@@ -64,16 +85,26 @@ public class Bundle implements Product,Cloneable{
         System.out.println(" )");
     }
 
+    /**
+     * @return
+     */
     @Override
     public String getName() {
         return "Bundle";
     }
 
+    /**
+     * @param quantity
+     */
     @Override
     public void setQuantity(int quantity) {
         Quantity = quantity;
     }
 
+    /**
+     * @return
+     * @throws CloneNotSupportedException
+     */
     @Override
     public Object clone() throws CloneNotSupportedException{
         return (Bundle) super.clone();

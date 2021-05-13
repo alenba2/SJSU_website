@@ -9,13 +9,15 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 @Document(collection = "users")
 public class Users {
     @Id
     public String id;
     public String username;
     public String password;
-//    public String oldPassword;
     public String newPassword;
 
     public Users(String username, String password) {
@@ -23,30 +25,47 @@ public class Users {
         this.password = password;
     }
 
+    /**
+     *
+     */
     public Users() {
 
     }
 
+    /**
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * @param password
+     */
     public void setPassword(String password) { this.password = password; }
 
-//    public String getOldPassword() { return oldPassword; }
-//
+    /**
+     * @return
+     */
     public String getNewPassword() { return newPassword; }
 
-//    public void setOldPassword(String oldPassword) {  this.oldPassword = oldPassword; }
-
+    /**
+     * @param newPassword
+     */
     public void setNewPassword(String newPassword) { this.newPassword = newPassword; }
 
     @Override

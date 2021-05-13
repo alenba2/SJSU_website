@@ -6,6 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Arrays;
 import java.util.Date;
 
+/**
+ *
+ */
 @Document(collection = "history")
 public class History {
 
@@ -16,6 +19,12 @@ public class History {
     public int quantity;
     public Date date;
 
+    /**
+     * @param username
+     * @param total
+     * @param quantity
+     * @param date
+     */
     public History(String username, Double total, int quantity,Date date) {
         this.username = username;
         this.total = total;
@@ -23,30 +32,45 @@ public class History {
         this.date = date;
     }
 
+    /**
+     *
+     */
     public History() {
 
     }
 
+    /**
+     * @return total
+     */
     public Double getTotal() {
         return total;
     }
 
+    /**
+     * @param total
+     */
     public void setTotal(Double total) {
         this.total = total;
     }
 
+    /**
+     * @return
+     */
     public int getQuantity() {
         return quantity;
     }
 
+    /**
+     * @param quantity
+     */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-//    public String toString(){
-//        return "History for " + username;
-//    }
 
+    /**
+     * @return
+     */
     public Date getDate() {
         return date;
     }

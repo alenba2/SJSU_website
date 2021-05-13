@@ -19,6 +19,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Controller
+ *
+ * Displays .jsp files depending on the type of URL
+ *
+ * the base URL that is required is: localhost:8008/Login
+ */
 @Controller
 public class MainController {
     @Autowired
@@ -67,18 +74,15 @@ public class MainController {
         ItemList.add(item4);
         ItemList.add(item5);
 
-        for(int i = 0; i < ItemList.length();i++)
-        {
-            System.out.println("Item number: "+ i +" "+ItemList.get(i).getQuantity());
-        }
-
     }
 
-    public MainController(UserRepository userrepo) {
-        this.userrepo = userrepo;
-    }
 
-    //    MainPage
+    /**
+     * @param model
+     *
+     *
+     * @return
+     */
     @RequestMapping("/MainPage")
     public String MainPage(Model model) {
         model.addAttribute("Username", currentUser);
@@ -90,7 +94,12 @@ public class MainController {
         return "MainPage";
     }
 
-    //    ItemPage
+
+    /**
+     * @param ItemNumber
+     * @param model
+     * @return
+     */
     @RequestMapping("/ItemPage")
     public String ItemPage(@RequestParam(name = "ItemNumber") int ItemNumber, Model model) {
 
@@ -102,6 +111,12 @@ public class MainController {
         return "ItemPage";
     }
 
+    /**
+     * @param Stock
+     * @param ItemNumber
+     * @param model
+     * @return
+     */
     @PostMapping("/ItemPage")
     public String ItemPage2( @RequestParam(name="Stock") int Stock,@RequestParam(name="ItemNumber") int ItemNumber, Model model) {
 
@@ -118,7 +133,6 @@ public class MainController {
 
     try
     {
-
 
 //        CLONES CLASS
         Product prod = (Product) ItemList.get(ItemNumber).clone();
@@ -138,6 +152,10 @@ public class MainController {
         return "redirect:MainPage";
     }
 
+    /**
+     * @param model
+     * @return
+     */
     //    CartPage on startup
     @RequestMapping("/Cart")
     public String Cart(Model model) {
@@ -149,6 +167,12 @@ public class MainController {
         return "cart";
     }
 
+    /**
+     * @param model
+     * @param quantity
+     * @param itemNumber
+     * @return
+     */
 //    When User wants to edit one of their items
     @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Submit"})
     public String updateCart(Model model, @RequestParam int quantity, @RequestParam int itemNumber) {
@@ -175,6 +199,12 @@ public class MainController {
         return "cart";
     }
 
+    /**
+     * @param model
+     * @param quantity
+     * @param itemNumber
+     * @return
+     */
 //    When User wants to delete one of their items
     @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Delete"})
     public String deleteCart(Model model, @RequestParam int quantity, @RequestParam String itemNumber) {
@@ -188,6 +218,10 @@ public class MainController {
         return "cart";
     }
 
+    /**
+     * @param model
+     * @return
+     */
 //    When User wants to Purchase Items
     @PostMapping(value = "/Cart", params = {"Checkout"})
     public String checkoutCart(Model model) {
@@ -249,6 +283,10 @@ public class MainController {
         return "redirect:ConfirmCheckout";
     }
 
+    /**
+     * @param model
+     * @return
+     */
     @RequestMapping("/ConfirmCheckout")
     public String ConfirmCheckout(Model model){
 
@@ -262,6 +300,10 @@ public class MainController {
         return "ConfirmCheckout";
     }
 
+    /**
+     * @param model
+     * @return
+     */
     //    User Logs out
     @PostMapping(value = "/ConfirmCheckout", params ="Logout" )
     public String Logout(Model model){
@@ -272,6 +314,10 @@ public class MainController {
         return "redirect:Login";
     }
 
+    /**
+     * @param model
+     * @return
+     */
     //    User continues to shop
     @PostMapping(value="/ConfirmCheckout", params = "Continue")
     public String ContinueShopping(Model model){
@@ -279,6 +325,10 @@ public class MainController {
         return "redirect:MainPage";
     }
 
+    /**
+     * @param model
+     * @return
+     */
     //    AccountSettings
     @RequestMapping("/AccountSettings")
     public String AccountSettings(Model model) {
@@ -289,22 +339,28 @@ public class MainController {
         return "AccountSettings";
     }
 
+    /**
+     * @return
+     */
     @RequestMapping("/ChangePassword")
     public String ChangePassword() {
         return "ChangePasswordPage";
     }
 
-//    @RequestMapping("/PurchaseHistory")
-//    public String PurchaseHistory() {
-//        return "PurchaseHistory";
-//    }
 
+    /**
+     * @return
+     */
     @RequestMapping("/SignUp")
     public String SignUp() {
         return "SignUp";
     }
 
 
+    /**
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/Login")
     public String Login(Model model) {
         model.addAttribute("users", currentUser);
@@ -312,6 +368,11 @@ public class MainController {
         return "Login";
     }
 
+    /**
+     * @param user
+     * @param model
+     * @return
+     */
     @PostMapping("/Login")
     public String getLog(@ModelAttribute Users user, Model model) {
 
@@ -331,11 +392,16 @@ public class MainController {
             return "Login";
         }
 
-
     }
 
     private ObjectMapper mapper = new ObjectMapper();
 
+    /**
+     * @param userHistory
+     * @param model
+     * @return
+     * @throws IOException
+     */
     @RequestMapping("/PurchaseHistory")
     public String getPurchaseHistory(@ModelAttribute History userHistory, Model model) throws IOException {
 
@@ -345,10 +411,6 @@ public class MainController {
         model.addAttribute("History", userPurchaseHistory);
         model.addAttribute("Username", currentUser);
 
-//        FOUND ERROR HERE
-//        double purchasePrice = userPurchaseHistory.get(0).getTotal();
-//        System.out.println("Purchase price: " + purchasePrice);
-//
         for (int i = 0; i < userPurchaseHistory.size(); i++) {
             String formattedPurchase = mapper.writeValueAsString(userPurchaseHistory.get(i));
             formattedPurchaseHistory.add(formattedPurchase);
@@ -368,6 +430,11 @@ public class MainController {
         return "PurchaseHistory";
     }
 
+    /**
+     * @param user
+     * @param model
+     * @return
+     */
     @PostMapping("/ChangePassword")
     public String changePassword(@ModelAttribute Users user, Model model) {
 
@@ -396,6 +463,13 @@ public class MainController {
             return "AccountSettings";
         }
     }
+
+    /**
+     * @param user
+     * @param model
+     * @return
+     */
+
     @PostMapping("/SignUp")
     public String getSubmit(@ModelAttribute Users user, Model model) {
         model.addAttribute("users", user);
