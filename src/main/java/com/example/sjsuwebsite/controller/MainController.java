@@ -24,7 +24,10 @@ import java.util.Date;
  *
  * Displays .jsp files depending on the type of URL
  *
- * the base URL that is required is: localhost:8008/Login
+ * the base URL that is required to start the project: localhost:8008
+ *
+ * Then it will run any method based on the URL including the base URL
+ *
  */
 @Controller
 public class MainController {
@@ -78,10 +81,15 @@ public class MainController {
 
 
     /**
+     * This is called when User goes to specified URL
+     *
      * @param model
      *
+     * Model is needed to add attribute to the URL so the .jsp file can get those data from the Controller
      *
      * @return
+     *
+     * What it returns is the name of the .jsp file that will be displayed for the URL /MainPage
      */
     @RequestMapping("/MainPage")
     public String MainPage(Model model) {
@@ -96,9 +104,19 @@ public class MainController {
 
 
     /**
+     * This is called when User goes to specified URL
+     *
      * @param ItemNumber
+     *
+     * The ItemNumber will be grabbed from the URL and it will display the Item based on the ItemNumber.
+     *
      * @param model
+     *
+     * The Item that was received from the ItemNumber will then will be stored to the Model
+     *
      * @return
+     *
+     * What it returns is the name of the .jsp file that will be displayed for the URL /ItemPage
      */
     @RequestMapping("/ItemPage")
     public String ItemPage(@RequestParam(name = "ItemNumber") int ItemNumber, Model model) {
@@ -112,11 +130,27 @@ public class MainController {
     }
 
     /**
+     * This is called when User enters/submits data
+     *
      * @param Stock
+     *
+     * The Stock is needed to put the number of stock to the CartList, if the Stock number is 0, It will
+     * Post an error to the .jsp file
+     *
      * @param ItemNumber
+     *
+     * The ItemNumber is needed to get which item from the ItemList that it needs to be copied and set the number of
+     * Stock
+     *
      * @param model
+     *
+     * The Model is needed to put attributes to the URL
+     *
      * @return
+     *
+     * Then it will redirect to the MainPage
      */
+
     @PostMapping("/ItemPage")
     public String ItemPage2( @RequestParam(name="Stock") int Stock,@RequestParam(name="ItemNumber") int ItemNumber, Model model) {
 
@@ -153,9 +187,18 @@ public class MainController {
     }
 
     /**
+     * This is called when User goes to specified URL
+     *
      * @param model
+     *
+     * Model is needed to set attributes to the URL
+     *
      * @return
+     *
+     * The method returns the page named cart.jsp with the URL /Cart
+     *
      */
+
     //    CartPage on startup
     @RequestMapping("/Cart")
     public String Cart(Model model) {
@@ -168,10 +211,27 @@ public class MainController {
     }
 
     /**
+     * This is called when User enters data
+     *
      * @param model
+     *
+     * Model is used to add attributes to the URL
+     *
      * @param quantity
+     *
+     * The quantity is needed to change the quantity from the
+     * CartList. If the quantity is below 0, It will shoot an error
+     * to the .jsp file instead
+     *
      * @param itemNumber
+     *
+     * The itemNumber is needed to get which item in the cart that needs
+     * modifying
+     *
      * @return
+     *
+     * Both quantity less than equal to -1 and above -1 will return cart.jsp file with the URL /Cart
+     *
      */
 //    When User wants to edit one of their items
     @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Submit"})
@@ -200,14 +260,25 @@ public class MainController {
     }
 
     /**
+     *
+     * This is called when User enters data
+     *
      * @param model
-     * @param quantity
+     *
+     * Model is needed to add attributes to the URL
+     *
      * @param itemNumber
+     *
+     * ItemNumber is needed to know which part of the ArrayList is needed to be deleted
+     *
      * @return
+     *
+     * returns cart.jsp file and the URL will be /Cart
+     *
      */
 //    When User wants to delete one of their items
     @PostMapping(value = "/Cart", params = {"quantity", "itemNumber", "Delete"})
-    public String deleteCart(Model model, @RequestParam int quantity, @RequestParam String itemNumber) {
+    public String deleteCart(Model model, @RequestParam String itemNumber) {
 
         CartList.delete(Integer.parseInt(itemNumber));
 
@@ -219,8 +290,24 @@ public class MainController {
     }
 
     /**
+     *
+     * This is called when User enters data
+     *
      * @param model
+     *
+     * Model is needed to add attributes to the URL
+     *
      * @return
+     *
+     * If any of the CartList has a quantity of 0, then it will shoot an error and
+     * return cart.jsp with the URL /Cart
+     *
+     * If not, The CartList will add up all the quantity and the cost and put those data to
+     * the History class, along with the date that it was created and currentUsers' name
+     *
+     * Then it will reduce the amount of stock based on the CartList and subtract the corresponding items on ItemList
+     *
+     * Then It will clear the cart and redirect to the ConfirmCheckout
      */
 //    When User wants to Purchase Items
     @PostMapping(value = "/Cart", params = {"Checkout"})
@@ -272,7 +359,7 @@ public class MainController {
                 if(CartList.get(i).getName().equals(ItemList.get(j).getName()))
                 {
                     ItemList.get(j).setQuantity(ItemList.get(j).getQuantity()-CartList.get(i).getQuantity());
-                    System.out.println("found target");
+
                     break;
                 }
             }
@@ -284,8 +371,16 @@ public class MainController {
     }
 
     /**
+     *
+     * This is called when User goes to the specified URL
+     *
      * @param model
+     *
+     * Model is needed to add attributes to the URL
+     *
      * @return
+     *
+     * It will return ConfirmCheckout.jsp with the URL /ConfirmCheckout
      */
     @RequestMapping("/ConfirmCheckout")
     public String ConfirmCheckout(Model model){
@@ -301,8 +396,18 @@ public class MainController {
     }
 
     /**
+     *
+     * This is called when User enters data
+     *
      * @param model
+     *
+     * Model is needed to add attributes to the URL
+     *
      * @return
+     *
+     * Removes data from currentUser by making it as a new User
+     *
+     * Redirects to Login
      */
     //    User Logs out
     @PostMapping(value = "/ConfirmCheckout", params ="Logout" )
@@ -315,8 +420,16 @@ public class MainController {
     }
 
     /**
+     *
+     * This is called when User enters data
+     *
      * @param model
+     *
+     * Model is needed to add attributes to Model
+     *
      * @return
+     *
+     * Redirects to MainPage
      */
     //    User continues to shop
     @PostMapping(value="/ConfirmCheckout", params = "Continue")
@@ -326,13 +439,22 @@ public class MainController {
     }
 
     /**
+     *
+     * This is called when User goes to the specified URL
+     *
      * @param model
+     *
+     * Model is needed to add attributes to Model
+     *
      * @return
+     *
+     * returns AccountSettings.jsp with URL /AccountSettings
+     *
      */
     //    AccountSettings
     @RequestMapping("/AccountSettings")
     public String AccountSettings(Model model) {
-        System.out.println(currentUser);
+
         model.addAttribute("Username", currentUser);
 
 
@@ -340,7 +462,12 @@ public class MainController {
     }
 
     /**
+     *
+     * This is called when User goes to the specified URL
+     *
      * @return
+     *
+     * returns ChangePasswordPage.jsp with the URL /ChangePassword
      */
     @RequestMapping("/ChangePassword")
     public String ChangePassword() {
@@ -349,7 +476,13 @@ public class MainController {
 
 
     /**
+     *
+     * This is called when User goes to the specified URL
+     *
      * @return
+     *
+     * returns SignUp.jsp with the URL /SignUp
+     *
      */
     @RequestMapping("/SignUp")
     public String SignUp() {
@@ -358,8 +491,16 @@ public class MainController {
 
 
     /**
+     *
+     * This is called when User goes to the specified URL
+     *
      * @param model
+     *
+     * Model is needed to add attributes to the URL
+     *
      * @return
+     *
+     * return Login.jsp with the URL /Login
      */
     @RequestMapping(value = "/Login")
     public String Login(Model model) {
@@ -369,9 +510,26 @@ public class MainController {
     }
 
     /**
+     *
+     * This is called when User enters data
+     *
      * @param user
+     *
+     * A set of params is grabbed from the URL to form a class User
+     *
      * @param model
+     *
+     * Model is needed to add attributes to the URL
+     *
      * @return
+     *
+     * First it checks if the User exist in the database
+     *
+     * If the user does exist, It redirects to the MainPage
+     *
+     * If not the it will send a message to the .jsp and
+     * returns Login.jsp and sets the URL /Login
+     *
      */
     @PostMapping("/Login")
     public String getLog(@ModelAttribute Users user, Model model) {
@@ -387,7 +545,6 @@ public class MainController {
             return "redirect:MainPage";
         }
         else {
-            System.out.println("no user");
             model.addAttribute("message", "Error: Username doesn't exist or Password is wrong");
             return "Login";
         }
@@ -397,7 +554,13 @@ public class MainController {
     private ObjectMapper mapper = new ObjectMapper();
 
     /**
+     *
+     * This is called when User goes to the specified URL
+     *
      * @param userHistory
+     *
+     *
+     *
      * @param model
      * @return
      * @throws IOException
@@ -465,25 +628,43 @@ public class MainController {
     }
 
     /**
+     *
+     * This is called when the User enters data
+     *
      * @param user
+     *
+     * Grabs a set of params from the URL and turns
+     * that data to be part of User class
+     *
      * @param model
+     *
+     * Model is needed to add attributes to the URL
+     *
      * @return
+     *
+     * First checks the database if the user exists in the database.
+     *
+     * If it does exist, then it send a Message to the .jsp file
+     * and returns SignUp.jsp with the URL /SignUP
+     *
+     * If not, adds the the user to the database then
+     * redirects to the Login
+     *
      */
 
     @PostMapping("/SignUp")
     public String getSubmit(@ModelAttribute Users user, Model model) {
         model.addAttribute("users", user);
-        System.out.println("3");
+
         boolean Existdb = userrepo.existsUsersByUsername(user.getUsername());
-        System.out.println("4");
+
         if (Existdb) {
             System.out.println("exist");
             model.addAttribute("message", "Error: Username exist in the Database");
             return "SignUp";
         } else {
-            System.out.println("new user added");
             userrepo.save(user);
-            return "Login";
+            return "redirect:Login";
         }
 
     }
