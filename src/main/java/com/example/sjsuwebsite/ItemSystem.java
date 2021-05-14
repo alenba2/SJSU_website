@@ -103,6 +103,8 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
+     * gets the specific product that this method is called on
+     *
      * @param Number
      * @return
      */
@@ -133,6 +135,8 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
+     * this method returns the size of the list that it is called on
+     *
      * @return the size of our list
      */
     public int length()
