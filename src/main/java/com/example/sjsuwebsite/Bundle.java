@@ -75,7 +75,7 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
-     *  Print evey item in the bundle
+     *  Print every item in the bundle
      */
     @Override
     public void printItem() {
