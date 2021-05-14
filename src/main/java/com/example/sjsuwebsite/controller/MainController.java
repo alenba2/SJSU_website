@@ -555,14 +555,20 @@ public class MainController {
 
     /**
      *
-     * This is called when User goes to the specified URL
+     * This is called when the user wants to see their purchase history
      *
      * @param userHistory
      *
-     *
+     * Gets the History model so we can use it in the purchase history functionality
      *
      * @param model
+     *
+     * Used to add attributes to the function
+     *
      * @return
+     *
+     *  Returns purchase history
+     *
      * @throws IOException
      */
     @RequestMapping("/PurchaseHistory")
@@ -594,9 +600,23 @@ public class MainController {
     }
 
     /**
+     *
+     * This function is called when the user wants to change their password
+     *
      * @param user
+     *
+     * Grabs the user model to use in the function
+     *
      * @param model
+     *
+     * Model is used to add attributes to the webpage
+     *
      * @return
+     *
+     *  If successful, the user changes their password and is redirected to the login page to use their new password
+     *  If unsuccessful, the user is redirected back to their settings page alerting them that their change password
+     *  request was unsuccessful
+     *
      */
     @PostMapping("/ChangePassword")
     public String changePassword(@ModelAttribute Users user, Model model) {
