@@ -10,7 +10,13 @@ public class Bundle implements Product,Cloneable{
     int Quantity = 0;
 
     /**
-     * @return The total cost of the bundle
+     *
+     * return the total cost of the bundle
+     *
+     * @return
+     *
+     * For every item in the array list of items
+     * add all the costs up and return the total amount for the bundle
      *
      */
     public double getCost() {
@@ -27,7 +33,12 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
-     * @return Quantity of bundle
+     *
+     * Return quantity of bundle
+     *
+     * @return
+     *
+     * Will get quantity of certain bundle and return it as an integer
      */
     public int getQuantity()
     {
@@ -35,8 +46,12 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
-     * @return True if quantity is > 0
-     *          False if not
+     *
+     * Return True if quantity is > 0, False if not
+     *
+     * @return
+     *
+     * Used getQuantity to check if the quantity is more than 0 or not
      */
     public Boolean getStock()
     {
@@ -51,8 +66,12 @@ public class Bundle implements Product,Cloneable{
 
 
     /**
-     * @param item
+     *
      * Add an item to the bundle
+     *
+     * @param item
+     *
+     * Take the item parameter and add it to the array list of items
      */
     public void addItem(Item item)
     {
@@ -60,8 +79,13 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
+     *
+     * Return the description of the bundle
+     *
      * @return
-     * The description of the bundle
+     *
+     * For every item in the array list of items, we add the item's name and
+     * description to the bundle's description and return it as a String
      */
     public String getDescription() {
         String Description = "Special Bundle that includes: <br/>";
@@ -75,6 +99,7 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
+     *
      *  Print every item in the bundle
      */
     @Override
@@ -90,7 +115,12 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
-     * @return "Bundle"
+     *
+     * Return "Bundle" as a String
+     *
+     * @return
+     *
+     * Return the name of the bundle, in this case it is just call "Bundle"
      */
     @Override
     public String getName() {
@@ -98,8 +128,11 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
+     * Set bundle's quantity
+     *
      * @param quantity
-     * set bundle's quantity
+     *
+     * Function take the quantity parameter and set it to the bundle's quantity
      */
     @Override
     public void setQuantity(int quantity) {
@@ -107,8 +140,15 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
-     * @return  An Bundle Object
+     * Return an Bundle Object
+     *
+     * @return
+     *
+     * Using the clone method to clone an item, cast it as a Bundle and return it.
+     *
      * @throws CloneNotSupportedException
+     *
+     * Throw a CloneNotSupportedException exception
      */
     @Override
     public Object clone() throws CloneNotSupportedException{
