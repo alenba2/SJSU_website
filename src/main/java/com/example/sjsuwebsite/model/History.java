@@ -7,7 +7,9 @@ import java.util.Arrays;
 import java.util.Date;
 
 /**
+ * Model
  *
+ * This class is supposed to hold data that the user has purchased through the Checkout Page
  */
 @Document(collection = "history")
 public class History {
@@ -21,9 +23,20 @@ public class History {
 
     /**
      * @param username
+     *
+     * Username related to the User class
+     *
      * @param total
+     *
+     * The total cost of the purchased item
+     *
      * @param quantity
+     *
+     * The total amount of items inside the cart
+     *
      * @param date
+     *
+     * The date when the item has been purchased
      */
     public History(String username, Double total, int quantity,Date date) {
         this.username = username;
@@ -33,43 +46,19 @@ public class History {
     }
 
     /**
-     *
-     */
-    public History() {
-
-    }
-
-    /**
      * @return total
+     *
+     * returns the total from the History class
      */
     public Double getTotal() {
         return total;
     }
 
-    /**
-     * @param total
-     */
-    public void setTotal(Double total) {
-        this.total = total;
-    }
 
     /**
      * @return
-     */
-    public int getQuantity() {
-        return quantity;
-    }
-
-    /**
-     * @param quantity
-     */
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-
-    /**
-     * @return
+     *
+     * returns the date from the History class
      */
     public Date getDate() {
         return date;

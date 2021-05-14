@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Model
  *
+ * This class is supposed to hold the user's information when they first sign up
  */
 @Document(collection = "users")
 public class Users {
@@ -20,34 +22,40 @@ public class Users {
     public String password;
     public String newPassword;
 
+    /**
+     * @param username
+     *
+     * Sets the user's username
+     *
+     * @param password
+     *
+     * Sets the user's password
+     */
     public Users(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
     /**
-     *
+     * Initializes as an empty user
      */
-    public Users() {
+    public Users(){
 
     }
 
     /**
      * @return
+     *
+     * Puts out the User's username
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * @param username
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
      * @return
+     *
+     * return the user's current password
      */
     public String getPassword() {
         return password;
@@ -55,23 +63,10 @@ public class Users {
 
     /**
      * @param password
+     *
+     * changes the current user's password to the new password
      */
     public void setPassword(String password) { this.password = password; }
 
-    /**
-     * @return
-     */
-    public String getNewPassword() { return newPassword; }
 
-    /**
-     * @param newPassword
-     */
-    public void setNewPassword(String newPassword) { this.newPassword = newPassword; }
-
-    @Override
-    public String toString(){
-        return "Users = { " +
-                "Username: " + username + "\t" +
-                "Password: " + password + " }";
-    }
 }
