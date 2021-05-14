@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *  Component Design
+ *
+ *  Able to merge Item and Bundle together into one long chain.
+ *  Uses Composite Design Pattern
  *
  */
 public class ItemSystem implements Product, Cloneable{

@@ -2,6 +2,8 @@ package com.example.sjsuwebsite;
 
 
 /**
+ * Leaf Component
+ *
  *  Item class that implements Product and Cloneable
  */
 public class Item implements Product,Cloneable {

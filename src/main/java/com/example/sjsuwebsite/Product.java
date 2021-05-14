@@ -2,7 +2,9 @@ package com.example.sjsuwebsite;
 
 /**
  *
- * the product interface handles the way we implement our items in the application
+ * Interface for Child: Bundle and Item
+ *
+ * For Composite Design Pattern
  *
  */
 public interface Product{

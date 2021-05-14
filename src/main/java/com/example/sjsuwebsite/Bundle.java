@@ -3,6 +3,9 @@ package com.example.sjsuwebsite;
 import java.util.ArrayList;
 
 /**
+ *
+ * Leaf Component
+ *
  * Bundle class that implement Product and Cloneable
  */
 public class Bundle implements Product,Cloneable{
