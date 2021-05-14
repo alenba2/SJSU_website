@@ -11,6 +11,8 @@ public class ItemSystem implements Product, Cloneable{
 
     /**
      *
+     * this method prints an item so we can check we are grabbing the correct item
+     *
      */
     public void printItem()
     {
@@ -21,6 +23,9 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
+     *
+     * this add method adds an item to the list
+     *
      * @param prod
      */
     public void add(Product prod)
@@ -46,7 +51,11 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
-     * @return
+     *
+     * this method returns the name of a certain item in the list
+     *
+     * @return the name of the product in the list
+     *
      */
     public String getName()
     {
@@ -61,6 +70,9 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
+     *
+     * this method sets the quantity/stock of an item
+     *
      * @param quantity
      */
     @Override
@@ -68,6 +80,9 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
+     *
+     * this method returns the quantity/stock of an item
+     *
      * @return
      */
     @Override
@@ -76,6 +91,9 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
+     *
+     * a clone object we use to grab a clone of a list so we don't modify the original
+     *
      * @return
      * @throws CloneNotSupportedException
      */
@@ -94,7 +112,10 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
-     * @return
+     *
+     * the getCost() method is a function we use to display the cost of an item in our jsp pages
+     *
+     * @return the cost of an item
      */
     @Override
     public double getCost(){
@@ -112,7 +133,7 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
-     * @return
+     * @return the size of our list
      */
     public int length()
     {
@@ -120,6 +141,9 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
+     *
+     * this method deletes a product from the list
+     *
      * @param number
      */
     public void delete(int number)
@@ -128,6 +152,8 @@ public class ItemSystem implements Product, Cloneable{
     }
 
     /**
+     *
+     * this method clears our cart when called
      *
      */
     public void clear()
