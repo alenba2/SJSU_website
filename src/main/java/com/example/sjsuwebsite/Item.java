@@ -2,7 +2,7 @@ package com.example.sjsuwebsite;
 
 
 /**
- *
+ *  Item class that implements Product and Cloneable
  */
 public class Item implements Product,Cloneable {
     private String Name;
@@ -12,10 +12,15 @@ public class Item implements Product,Cloneable {
 
 
     /**
+     * Constructor for an Item that
      * @param name
+     * Set item's name
      * @param quantity
+     * Set item's quantity
      * @param description
+     * Set item's description
      * @param cost
+     * Set item's cost
      */
     public Item(String name, int quantity, String description, double cost) {
         Name = name;
@@ -25,7 +30,8 @@ public class Item implements Product,Cloneable {
     }
 
     /**
-     * @return
+     * getCost
+     * @return Cost of item
      */
     public double getCost() {
         return Cost;
@@ -33,21 +39,25 @@ public class Item implements Product,Cloneable {
 
 
     /**
+     * setCost
      * @param cost
+     * Set cost to Cost
      */
     public void setCost(double cost) {
         Cost = cost;
     }
 
     /**
-     * @return
+     * getName
+     * @return Name of item
+     *
      */
     public String getName() {
         return Name;
     }
 
     /**
-     *
+     * Print the item
      */
     public void printItem(){
         System.out.println("Item class: " + Name);
@@ -55,13 +65,14 @@ public class Item implements Product,Cloneable {
 
     /**
      * @param name
+     * Set name of item
      */
     public void setName(String name) {
         Name = name;
     }
 
     /**
-     * @return
+     * @return Quantity of item
      */
     public int getQuantity() {
         return Quantity;
@@ -69,13 +80,14 @@ public class Item implements Product,Cloneable {
 
     /**
      * @param quantity
+     * Set quantity for item
      */
     public void setQuantity(int quantity) {
         Quantity = quantity;
     }
 
     /**
-     * @return
+     * @return A clone of the Object that call it
      * @throws CloneNotSupportedException
      */
     @Override
@@ -84,7 +96,8 @@ public class Item implements Product,Cloneable {
     }
 
     /**
-     * @return
+     * @return  True if quantity is > 0
+     *          False if not
      */
     public Boolean getStock()
     {
@@ -98,7 +111,7 @@ public class Item implements Product,Cloneable {
     }
 
     /**
-     * @return
+     * @return Description of item
      */
     public String getDescription() {
         return Description;
@@ -106,6 +119,7 @@ public class Item implements Product,Cloneable {
 
     /**
      * @param description
+     * Set the description for item
      */
     public void setDescription(String description) {
         Description = description;

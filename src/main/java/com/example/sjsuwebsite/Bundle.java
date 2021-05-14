@@ -3,14 +3,15 @@ package com.example.sjsuwebsite;
 import java.util.ArrayList;
 
 /**
- *
+ * Bundle class that implement Product and Cloneable
  */
 public class Bundle implements Product,Cloneable{
     ArrayList<Item> items = new ArrayList<>();
     int Quantity = 0;
 
     /**
-     * @return
+     * @return The total cost of the bundle
+     *
      */
     public double getCost() {
         double price = 0.0;
@@ -26,7 +27,7 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
-     * @return
+     * @return Quantity of bundle
      */
     public int getQuantity()
     {
@@ -34,7 +35,8 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
-     * @return
+     * @return True if quantity is > 0
+     *          False if not
      */
     public Boolean getStock()
     {
@@ -50,6 +52,7 @@ public class Bundle implements Product,Cloneable{
 
     /**
      * @param item
+     * Add an item to the bundle
      */
     public void addItem(Item item)
     {
@@ -58,6 +61,7 @@ public class Bundle implements Product,Cloneable{
 
     /**
      * @return
+     * The description of the bundle
      */
     public String getDescription() {
         String Description = "Special Bundle that includes: <br/>";
@@ -71,7 +75,7 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
-     *
+     *  Print evey item in the bundle
      */
     @Override
     public void printItem() {
@@ -86,7 +90,7 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
-     * @return
+     * @return "Bundle"
      */
     @Override
     public String getName() {
@@ -95,6 +99,7 @@ public class Bundle implements Product,Cloneable{
 
     /**
      * @param quantity
+     * set bundle's quantity
      */
     @Override
     public void setQuantity(int quantity) {
@@ -102,7 +107,7 @@ public class Bundle implements Product,Cloneable{
     }
 
     /**
-     * @return
+     * @return  An Bundle Object
      * @throws CloneNotSupportedException
      */
     @Override
