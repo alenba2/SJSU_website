@@ -27,6 +27,8 @@ public interface Product{
      * the setQuantity() method sets the amount of stock there is for a certain item we have in our shop
      *
      * @param quantity
+     *
+     * Grabs an int value and sets it as its quantity
      */
     void setQuantity(int quantity);
 
@@ -50,7 +52,13 @@ public interface Product{
      * clone object that we use to duplicate our product without referring to the same address of the original product
      *
      * @return
+     *
+     * returns an cloned Object
+     *
      * @throws CloneNotSupportedException
+     *
+     * Error case when Object is not cloneable
+     *
      */
     Object clone() throws CloneNotSupportedException;
 }

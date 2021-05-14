@@ -27,6 +27,8 @@ public class ItemSystem implements Product, Cloneable{
      * this add method adds an item to the list
      *
      * @param prod
+     *
+     * grabs product class and adds it to the List
      */
     public void add(Product prod)
     {
@@ -71,9 +73,11 @@ public class ItemSystem implements Product, Cloneable{
 
     /**
      *
-     * this method sets the quantity/stock of an item
+     * Does nothing
      *
      * @param quantity
+     *
+     * grabs quantity, but does nothing
      */
     @Override
     public void setQuantity(int quantity) {
@@ -81,9 +85,11 @@ public class ItemSystem implements Product, Cloneable{
 
     /**
      *
-     * this method returns the quantity/stock of an item
+     * Does nothing
      *
      * @return
+     *
+     * Returns -1
      */
     @Override
     public int getQuantity() {
@@ -92,10 +98,15 @@ public class ItemSystem implements Product, Cloneable{
 
     /**
      *
-     * a clone object we use to grab a clone of a list so we don't modify the original
+     * Does nothing
      *
      * @return
+     *
+     * does nothing
+     *
      * @throws CloneNotSupportedException
+     *
+     * does nothing
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
@@ -106,7 +117,12 @@ public class ItemSystem implements Product, Cloneable{
      * gets the specific product that this method is called on
      *
      * @param Number
+     *
+     * Gets number for the List
+     *
      * @return
+     *
+     * puts out a Product based on the number
      */
     public Product get(int Number)
     {
@@ -149,6 +165,8 @@ public class ItemSystem implements Product, Cloneable{
      * this method deletes a product from the list
      *
      * @param number
+     *
+     * removes a product from the list based on the number
      */
     public void delete(int number)
     {
@@ -157,7 +175,7 @@ public class ItemSystem implements Product, Cloneable{
 
     /**
      *
-     * this method clears our cart when called
+     * Method clears the list
      *
      */
     public void clear()
